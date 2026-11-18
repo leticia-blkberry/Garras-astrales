@@ -1,7 +1,7 @@
 # Garras Astrales Collective — Website
 
 Website for **Garras Astrales Collective**, a cat-only rescue. Plain HTML/CSS/JS — no build step.
-Open `index.html` in a browser, or host the folder on GitHub Pages, Netlify, or any static host.
+Open `index.html` in a browser to preview. Hosted on **SiteGround** (see below).
 
 ## Pages
 | File | Purpose |
@@ -24,7 +24,7 @@ Put photos in `assets/cats/` and set `photo: "assets/cats/luna.jpg"`. Set `featu
 - [ ] "Our story" on `about.html`
 - [ ] Email, location, and social links (header/footer, `contact.html`)
 - [ ] Donation + wishlist links (`get-involved.html`)
-- [ ] Connect the contact form to a service (e.g. Jotform, Formspree, Netlify Forms) by adding an `action` to the form
+- [ ] Set the two email addresses at the top of `contact.php`
 - [ ] Local emergency vet resources (`contact.html`)
 
 ## Structure
@@ -51,3 +51,37 @@ The PNGs were cut from the supplied sheet. A vector (SVG) or high-resolution ori
 
 Colors (from the logo, set in `css/styles.css`): espresso `#3d3431`, amber `#e9a048`, deep amber `#e08f28`, cream `#f8f1ec`, warm gray `#6e6763`.
 Fonts: Cormorant Garamond (headings, matches the wordmark) and Nunito Sans (body text).
+
+## Publishing on SiteGround
+
+The site is plain files, so any SiteGround plan works. `contact.php` sends the contact form by email using SiteGround's built-in mail.
+
+**1. Upload the files**
+1. In SiteGround, open **Site Tools** for your domain, then **Site → File Manager**.
+2. Open `public_html`. If SiteGround put a default `index.html` there, delete it.
+3. Upload `garras-astrales-site.zip` (made with the command below), right-click it, choose **Extract**, then delete the zip.
+   `index.html` should sit directly inside `public_html`, not in a subfolder.
+   `.htaccess` starts with a dot, so File Manager may hide it. Turn on "show hidden files" to check it's there.
+
+Other ways in: **Site → FTP Accounts** (FileZilla, etc.) or **Devs → Git** on plans that include it.
+
+**2. Set up the contact form email**
+1. **Email → Accounts**: create a sending address on your domain, e.g. `website@yourdomain.org`.
+2. In File Manager, edit `contact.php` and set `$TO` (where messages should go) and `$FROM` (that new address).
+3. Send a test message from the Contact page. Check spam the first time.
+
+**3. HTTPS**
+**Security → SSL Manager**: make sure a free Let's Encrypt certificate is installed. `.htaccess` then redirects every visitor to `https://`.
+
+**Making the upload zip** (from the project folder):
+```
+zip -r garras-astrales-site.zip . -x '.git/*' 'README.md' 'assets/logo-sheet-original.png'
+```
+For later updates, upload just the changed files to the same place in `public_html`, replacing the old ones.
+
+### Server files
+| File | Purpose |
+|------|---------|
+| `contact.php` | Emails contact-form messages; includes spam protection |
+| `.htaccess` | HTTPS redirect, 404 page, caching, hides private files |
+| `404.html` | "Page not found" page |

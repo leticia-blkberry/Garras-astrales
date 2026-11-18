@@ -252,3 +252,6 @@ input:focus, select:focus, textarea:focus, .btn:focus-visible, .chip:focus-visib
 .placeholder-note {
   background: #fdf0dc; border: 1px dashed var(--amber-deep); border-radius: 10px; padding: 10px 14px; font-size: 0.9rem;
 }
+
+/* Spam honeypot field: hidden from people, visible to bots */
+.hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }

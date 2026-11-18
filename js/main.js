@@ -89,13 +89,33 @@
     if (params.get("subject")) subjectField.value = params.get("subject");
   }
 
-  // Contact form: placeholder handler until a real form service is connected
+  // Contact form: sends to contact.php without leaving the page.
+  // Without JavaScript the form still posts normally and contact.php redirects back.
   var form = document.getElementById("contact-form");
-  if (form && !form.getAttribute("action")) {
+  if (form) {
+    var status = document.getElementById("form-status");
+    var started = form.querySelector('[name="started"]');
+    if (started) started.value = Date.now();
+
+    var params2 = new URLSearchParams(window.location.search);
+    if (params2.get("sent")) status.textContent = "Thanks! Your message has been sent. A volunteer will get back to you soon.";
+    if (params2.get("error")) status.textContent = "Sorry, something went wrong. Please check the form or email us directly.";
+
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      var status = document.getElementById("form-status");
-      status.textContent = "Thanks! Your message is ready — but this form isn't connected yet (see README).";
+      var button = form.querySelector('[type="submit"]');
+      button.disabled = true;
+      status.textContent = "Sending…";
+      fetch(form.action, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } })
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          status.textContent = data.message;
+          if (data.ok) form.reset();
+        })
+        .catch(function () {
+          status.textContent = "Sorry, the message couldn't be sent. Please email us directly.";
+        })
+        .finally(function () { button.disabled = false; });
     });
   }
 })();
