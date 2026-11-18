@@ -22,7 +22,8 @@ Put photos in `assets/cats/` and set `photo: "assets/cats/luna.jpg"`. Set `featu
 - [ ] Impact numbers on the homepage (`000`)
 - [ ] Adoption fees (`$___` on `adopt.html`)
 - [ ] "Our story" on `about.html`
-- [ ] Email, location, and social links (header/footer, `contact.html`)
+- [x] Instagram link
+- [ ] Email and location (header/footer, `contact.html`)
 - [ ] Donation + wishlist links (`get-involved.html`)
 - [ ] Set the two email addresses at the top of `contact.php`
 - [ ] Local emergency vet resources (`contact.html`)
