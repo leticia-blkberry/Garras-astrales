@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact | Garras Astrales Collective</title>
+  <meta name="description" content="Contact Garras Astrales Collective.">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="index.html">
+        <img src="assets/logo.svg" alt="">
+        <span>Garras Astrales<small>Cat Rescue Collective</small></span>
+      </a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="site-nav" id="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="adopt.html">Adopt</a></li>
+          <li><a href="get-involved.html">Get Involved</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html" aria-current="page">Contact</a></li>
+          <li><a class="btn btn--primary" href="get-involved.html#donate">Donate</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <section class="hero page-hero">
+      <div class="stars" aria-hidden="true"></div>
+      <div class="container">
+        <p class="eyebrow">Contact</p>
+        <h1>Say hello</h1>
+        <p class="lead">Questions about adopting, fostering, or a cat in need? Send us a message — a volunteer will get back to you.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container grid grid--2">
+        <form id="contact-form" class="card">
+          <div><label for="name">Your name</label><input id="name" name="name" required autocomplete="name"></div>
+          <div><label for="email">Email</label><input id="email" name="email" type="email" required autocomplete="email"></div>
+          <div>
+            <label for="topic">I'm reaching out about</label>
+            <select id="topic" name="topic">
+              <option>Adopting a cat</option>
+              <option>Fostering</option>
+              <option>Volunteering</option>
+              <option>A cat that needs help</option>
+              <option>Donations</option>
+              <option>Something else</option>
+            </select>
+          </div>
+          <div><label for="subject">Subject</label><input id="subject" name="subject"></div>
+          <div><label for="message">Message</label><textarea id="message" name="message" rows="6" required></textarea></div>
+          <button class="btn btn--primary" type="submit">Send message</button>
+          <p id="form-status" class="form-status" role="status"></p>
+        </form>
+        <div>
+          <h2>Other ways to reach us</h2>
+          <p><strong>Email:</strong> <a href="mailto:hello@example.org">hello@example.org</a></p>
+          <p><strong>Instagram:</strong> <a href="#">@garrasastrales</a></p>
+          <p><strong>Location:</strong> City, Region (we don't have a public shelter — all cats live in foster homes)</p>
+          <div class="placeholder-note">
+            <strong>Cat emergency?</strong> If a cat is injured, please contact your nearest emergency vet first. Add local emergency resources here.
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3>Garras Astrales</h3>
+          <p>A volunteer-run, cat-only rescue collective. Every cat deserves a place among the stars — and a warm home on Earth.</p>
+        </div>
+        <div>
+          <h3>Explore</h3>
+          <ul>
+            <li><a href="adopt.html">Adoptable cats</a></li>
+            <li><a href="get-involved.html#foster">Foster</a></li>
+            <li><a href="get-involved.html#volunteer">Volunteer</a></li>
+            <li><a href="get-involved.html#donate">Donate</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Contact</h3>
+          <ul>
+            <li><a href="mailto:hello@example.org">hello@example.org</a></li>
+            <li>City, Region</li>
+            <li><a href="#">Instagram</a> · <a href="#">Facebook</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">&copy; <span data-year></span> Garras Astrales Collective. All rights reserved.</div>
+    </div>
+  </footer>
+  <script src="js/main.js"></script>
+</body>
+</html>

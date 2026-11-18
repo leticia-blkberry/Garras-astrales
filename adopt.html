@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Adopt a Cat | Garras Astrales Collective</title>
+  <meta name="description" content="Meet the adoptable cats of Garras Astrales Collective.">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="index.html">
+        <img src="assets/logo.svg" alt="">
+        <span>Garras Astrales<small>Cat Rescue Collective</small></span>
+      </a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="site-nav" id="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="adopt.html" aria-current="page">Adopt</a></li>
+          <li><a href="get-involved.html">Get Involved</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a class="btn btn--primary" href="get-involved.html#donate">Donate</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <section class="hero page-hero">
+      <div class="stars" aria-hidden="true"></div>
+      <div class="container">
+        <p class="eyebrow">Adopt</p>
+        <h1>Find your feline constellation</h1>
+        <p class="lead">Each of our cats lives with a foster family, so we know their personalities well. Tell us who caught your eye and we'll help you find the right match.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="filters" role="group" aria-label="Filter cats by age">
+          <button class="chip" data-filter="all" aria-pressed="true">All cats</button>
+          <button class="chip" data-filter="kitten" aria-pressed="false">Kittens</button>
+          <button class="chip" data-filter="young" aria-pressed="false">Young</button>
+          <button class="chip" data-filter="adult" aria-pressed="false">Adults</button>
+          <button class="chip" data-filter="senior" aria-pressed="false">Seniors</button>
+        </div>
+        <div class="grid grid--3" id="cat-list" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="section section--alt">
+      <div class="container grid grid--2">
+        <div>
+          <h2>How adoption works</h2>
+          <ol class="steps">
+            <li><strong>Browse &amp; reach out.</strong> Tell us which cat you're interested in, or describe what you're looking for.</li>
+            <li><strong>Application.</strong> A short form about your home and experience with cats.</li>
+            <li><strong>Meet &amp; greet.</strong> Visit the cat at their foster home or a video call.</li>
+            <li><strong>Welcome home.</strong> Sign the adoption agreement, pay the fee, and start your new life together.</li>
+          </ol>
+        </div>
+        <div class="card">
+          <h3>Adoption fees</h3>
+          <p>Fees help cover the care each cat received.</p>
+          <ul>
+            <li>Kittens (under 1 year): $___</li>
+            <li>Adults (1–9 years): $___</li>
+            <li>Seniors (10+): $___</li>
+            <li>Bonded pairs: $___ for both</li>
+          </ul>
+          <p class="form-note">Every cat is vet-checked, vaccinated, microchipped, dewormed, and spayed/neutered (when old enough).</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3>Garras Astrales</h3>
+          <p>A volunteer-run, cat-only rescue collective. Every cat deserves a place among the stars — and a warm home on Earth.</p>
+        </div>
+        <div>
+          <h3>Explore</h3>
+          <ul>
+            <li><a href="adopt.html">Adoptable cats</a></li>
+            <li><a href="get-involved.html#foster">Foster</a></li>
+            <li><a href="get-involved.html#volunteer">Volunteer</a></li>
+            <li><a href="get-involved.html#donate">Donate</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Contact</h3>
+          <ul>
+            <li><a href="mailto:hello@example.org">hello@example.org</a></li>
+            <li>City, Region</li>
+            <li><a href="#">Instagram</a> · <a href="#">Facebook</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">&copy; <span data-year></span> Garras Astrales Collective. All rights reserved.</div>
+    </div>
+  </footer>
+  <script src="js/cats.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
