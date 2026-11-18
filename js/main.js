@@ -28,9 +28,8 @@
   });
 
   // Cat cards
-  var CAT_SVG =
-    '<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M12 50 L12 18 L22 28 Q32 24 42 28 L52 18 L52 50 Q52 60 32 60 Q12 60 12 50 Z" fill="#f6c453"/>' +
-    '<circle cx="24" cy="42" r="3" fill="#1b1640"/><circle cx="40" cy="42" r="3" fill="#1b1640"/></svg>';
+  // Shown until a cat has a real photo
+  var PLACEHOLDER = '<img class="placeholder" src="assets/logo-mark.png" alt="" loading="lazy">';
 
   function esc(str) {
     var d = document.createElement("div");
@@ -41,9 +40,9 @@
   function catCard(cat) {
     var photo = cat.photo
       ? '<img src="' + esc(cat.photo) + '" alt="Photo of ' + esc(cat.name) + '" loading="lazy">'
-      : CAT_SVG;
+      : PLACEHOLDER;
     var tags = cat.traits.map(function (t) { return '<span class="tag">' + esc(t) + "</span>"; }).join("");
-    if (cat.status === "pending") tags = '<span class="tag tag--rose">Adoption pending</span>' + tags;
+    if (cat.status === "pending") tags = '<span class="tag tag--dark">Adoption pending</span>' + tags;
     var subject = encodeURIComponent("Adoption inquiry: " + cat.name);
     return (
       '<article class="card cat-card">' +
