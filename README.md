@@ -50,6 +50,9 @@ assets/          Logos (see below)
 
 The PNGs were cut from the supplied sheet. A vector (SVG) or high-resolution original from the designer would look sharper on large screens.
 
+Homepage video: `assets/hero-cat.mp4` (compressed to 720p, 12 s, no sound, 1.6 MB) with `assets/hero-cat-poster.jpg` shown while it loads and for visitors who turn off motion.
+Source: "A cat walking in jungle" from Pexels (https://www.pexels.com/video/a-cat-walking-in-jungle-13825391/). Free under the Pexels license; credit is appreciated but not required.
+
 Colors (from the logo, set in `css/styles.css`): espresso `#3d3431`, amber `#e9a048`, deep amber `#e08f28`, cream `#f8f1ec`, warm gray `#6e6763`.
 Fonts: Cormorant Garamond (headings, matches the wordmark) and Nunito Sans (body text).
 
