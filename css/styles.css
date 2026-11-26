@@ -174,11 +174,13 @@ img { max-width: 100%; display: block; }
 .hero--home .container { z-index: 1; width: 100%; }
 .hero--home h1 { text-shadow: 0 2px 16px rgba(0,0,0,0.35); }
 .hero--home .lead { color: #f3ebe4; }
+.hero--home .eyebrow { color: var(--amber-soft); text-shadow: 0 1px 8px rgba(0,0,0,0.55); text-wrap: balance; }
 .hero--home .btn--ghost { color: var(--cream); }
 @media (prefers-reduced-motion: reduce) { .hero-video { display: none; } }
 @media (max-width: 480px) {
   .eyebrow { letter-spacing: 0.16em; font-size: 0.72rem; gap: 8px; }
   .eyebrow::before, .hero-center .eyebrow::after { width: 18px; }
+  .hero-center .eyebrow::before, .hero-center .eyebrow::after { display: none; }
 }
 
 .hero-center { text-align: center; }
