@@ -82,55 +82,45 @@ img { max-width: 100%; display: block; }
 .btn--ghost { border-color: currentColor; color: inherit; background: transparent; }
 .btn-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
 
-/* Header */
+/* Header: centered primary logo with the menu below */
 .site-header {
-  background: rgba(248, 241, 236, 0.96);
+  position: relative; z-index: 50;
+  background: var(--cream);
   border-bottom: 1px solid var(--line);
-  position: sticky; top: 0; z-index: 50;
-  backdrop-filter: blur(6px);
 }
 .site-header .container {
-  display: flex; align-items: center; justify-content: space-between; gap: 16px;
-  min-height: 76px;
+  position: relative;
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+  padding-top: 22px; padding-bottom: 14px;
 }
-.brand { display: flex; align-items: center; gap: 12px; color: var(--espresso); text-decoration: none; }
-.brand img { width: 52px; height: auto; }
-.brand span {
-  font-family: "Cormorant Garamond", Georgia, serif; font-size: 1.35rem; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.04em; line-height: 1; white-space: nowrap;
-}
-@media (max-width: 420px) {
-  .brand img { width: 42px; }
-  .brand span { font-size: 1.1rem; }
-  .brand small { letter-spacing: 0.32em; }
-}
-.brand small {
-  display: block; margin-top: 4px; font-family: "Nunito Sans", sans-serif; font-size: 0.62rem; font-weight: 700;
-  letter-spacing: 0.42em; color: var(--muted);
-}
+.brand { display: block; border-radius: 8px; }
+.brand img { width: 180px; height: auto; }
 
 .nav-toggle {
   display: none; background: none; border: 2px solid var(--espresso); color: var(--espresso);
   border-radius: 10px; padding: 6px 12px; font: inherit; font-weight: 700; cursor: pointer;
 }
-.site-nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 4px; align-items: center; }
+.site-nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; align-items: center; }
 .site-nav a {
-  color: var(--espresso); text-decoration: none; padding: 8px 12px; border-radius: 999px; font-weight: 700;
+  color: var(--espresso); text-decoration: none; padding: 8px 14px; border-radius: 999px; font-weight: 700;
 }
 .site-nav a:hover, .site-nav a[aria-current="page"] { background: var(--amber-soft); }
 .site-nav .btn--primary { margin-left: 6px; }
 .site-nav .btn--primary:hover { background: var(--amber-deep); }
 
 @media (max-width: 880px) {
-  .nav-toggle { display: block; }
+  .site-header .container { padding-top: 14px; padding-bottom: 12px; }
+  .brand img { width: 120px; }
+  .nav-toggle { display: block; position: absolute; right: 16px; top: 50%; transform: translateY(-50%); }
   .site-nav {
-    display: none; position: absolute; top: 76px; left: 0; right: 0;
+    display: none; position: absolute; top: 100%; left: 0; right: 0;
     background: var(--cream); border-bottom: 1px solid var(--line); padding: 8px 16px 20px;
+    box-shadow: var(--shadow);
   }
   .site-nav.open { display: block; }
   .site-nav ul { flex-direction: column; align-items: stretch; }
-  .site-nav a { display: block; }
-  .site-nav .btn--primary { margin: 8px 0 0; text-align: center; }
+  .site-nav a { display: block; text-align: center; }
+  .site-nav .btn--primary { margin: 8px 0 0; }
 }
 
 /* Hero (dark, starry) */
@@ -152,9 +142,9 @@ img { max-width: 100%; display: block; }
 @media (prefers-reduced-motion: reduce) { .stars i { animation: none; } .btn:hover { transform: none; } }
 .hero .container { position: relative; }
 
-/* Home hero (light, featuring the primary logo) */
+/* Home hero (light) */
 .hero--home {
-  background: radial-gradient(ellipse at 80% 40%, #fff 0%, var(--cream) 60%);
+  background: radial-gradient(ellipse at 50% 30%, #fff 0%, var(--cream) 65%);
   color: var(--ink);
   padding: 64px 0 72px;
   border-bottom: 1px solid var(--line);
@@ -163,12 +153,10 @@ img { max-width: 100%; display: block; }
 .hero--home .lead { color: var(--muted); }
 .hero--home .eyebrow { color: var(--amber-deep); }
 .hero--home .stars i { background: var(--amber); opacity: 0.5; }
-.hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 48px; align-items: center; }
-.hero-logo { width: 100%; height: auto; max-width: 420px; justify-self: center; }
-@media (max-width: 820px) {
-  .hero-grid { grid-template-columns: 1fr; gap: 24px; }
-  .hero-logo { max-width: 260px; order: -1; }
-}
+.hero-center { text-align: center; }
+.hero-center .lead { margin-inline: auto; }
+.hero-center .eyebrow, .hero-center .btn-row { justify-content: center; }
+.hero-center .eyebrow::after { content: ""; width: 28px; height: 1px; background: currentColor; }
 
 /* Grids & cards */
 .grid { display: grid; gap: 24px; }
