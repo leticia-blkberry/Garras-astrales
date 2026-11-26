@@ -82,6 +82,22 @@ img { max-width: 100%; display: block; }
 .btn--ghost { border-color: currentColor; color: inherit; background: transparent; }
 .btn-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
 
+/* Top bar above the header */
+.top-bar { background: var(--espresso-deep); color: var(--on-dark); font-size: 0.85rem; }
+.top-bar .container { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 38px; }
+.top-bar-msg { margin: 0; }
+.top-bar-ig {
+  display: inline-flex; align-items: center; gap: 8px; color: var(--cream); text-decoration: none; font-weight: 700;
+  padding: 4px 8px; margin-right: -8px; border-radius: 999px;
+}
+.top-bar-ig:hover { color: var(--amber); }
+.ig-icon { width: 18px; height: 18px; flex: none; }
+@media (max-width: 640px) {
+  .top-bar-msg { display: none; }
+  .top-bar .container { justify-content: center; }
+  .top-bar-ig { margin-right: 0; }
+}
+
 /* Header: menu split in two with the logo in the middle */
 .site-header {
   position: relative; z-index: 50;
