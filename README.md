@@ -53,7 +53,7 @@ The PNGs were cut from the supplied sheet. A vector (SVG) or high-resolution ori
 Homepage video: `assets/hero-cat.mp4` (compressed to 720p, 12 s, no sound, 1.6 MB) with `assets/hero-cat-poster.jpg` shown while it loads and for visitors who turn off motion.
 Source: "A cat walking in jungle" from Pexels (https://www.pexels.com/video/a-cat-walking-in-jungle-13825391/). Free under the Pexels license; credit is appreciated but not required.
 
-Colors (from the logo, set in `css/styles.css`): espresso `#3d3431`, amber `#e9a048`, deep amber `#e08f28`, cream `#f8f1ec`, warm gray `#6e6763`.
+Colors (set in `css/styles.css`): page background `#EDE8D0`, cards `#F7F4E8`, plus the logo's espresso `#3d3431`, amber `#e9a048`, deep amber `#e08f28`, cream `#f8f1ec` (light text on dark areas) and warm gray `#6e6763`.
 Fonts: Cormorant Garamond (headings, matches the wordmark) and Nunito Sans (body text).
 
 ## Publishing on SiteGround
@@ -89,3 +89,6 @@ For later updates, upload just the changed files to the same place in `public_ht
 | `contact.php` | Emails contact-form messages; includes spam protection |
 | `.htaccess` | HTTPS redirect, 404 page, caching, hides private files |
 | `404.html` | "Page not found" page |
+
+## Hero concepts (temporary)
+`hero-option-1.html` (Portal), `hero-option-2.html` (Moonrise) and `hero-option-3.html` (Wordmark) are homepage variations for choosing a hero style, styled by `css/hero-concepts.css`. Once one is chosen it gets merged into `index.html` and these files are deleted. They are left out of the upload zip.
