@@ -346,6 +346,9 @@ input:focus, select:focus, textarea:focus, .btn:focus-visible, .chip:focus-visib
 .footer-logo { width: 180px; margin-bottom: 16px; filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.45)); }
 .footer-grid { display: grid; gap: 32px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
 .footer-bottom { border-top: 1px solid rgba(248,241,236,0.14); margin-top: 32px; padding-top: 20px; font-size: 0.85rem; }
+.footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
+/* Flaticon licence credit: kept in the legal line, same small print as the copyright */
+.footer-credit a { color: inherit; }
 
 .placeholder-note {
   background: #fdf0dc; border: 1px dashed var(--amber-deep); border-radius: 10px; padding: 10px 14px; font-size: 0.9rem;
