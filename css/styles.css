@@ -347,8 +347,8 @@ input:focus, select:focus, textarea:focus, .btn:focus-visible, .chip:focus-visib
 .footer-grid { display: grid; gap: 32px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
 .footer-bottom { border-top: 1px solid rgba(248,241,236,0.14); margin-top: 32px; padding-top: 20px; font-size: 0.85rem; }
 .footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
-/* Flaticon licence credit: kept in the legal line, same small print as the copyright */
-.footer-credit a { color: inherit; }
+/* "Credits" link (icon, video and photo credits live on credits.html) */
+.footer-credit { color: inherit; display: inline-block; padding: 2px 0; }
 
 .placeholder-note {
   background: #fdf0dc; border: 1px dashed var(--amber-deep); border-radius: 10px; padding: 10px 14px; font-size: 0.9rem;
@@ -453,3 +453,9 @@ input:focus, select:focus, textarea:focus, .btn:focus-visible, .chip:focus-visib
 @media (max-width: 360px) {
   .impact .stats-caption { letter-spacing: 0.08em; }
 }
+
+/* Credits page */
+.credits { max-width: 760px; }
+.credits h2 { margin-top: 1.4em; font-size: 1.6rem; }
+.credits ul { padding-left: 1.2em; }
+.credits li { margin: 4px 0; }

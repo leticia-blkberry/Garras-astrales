@@ -11,6 +11,7 @@ Open `index.html` in a browser to preview. Hosted on **SiteGround** (see below).
 | `get-involved.html` | Foster, volunteer, donate |
 | `about.html` | Mission, story, values |
 | `contact.html` | Contact form + other contact info |
+| `credits.html` | Credits for the icons, video and photos (linked from the footer) |
 | `cat.html` | One page per cat, e.g. `cat.html?c=kaya`, built from `js/cats.js` (the name becomes the link: "Orión" → `orion`) |
 
 ## Updating the cats
@@ -54,7 +55,7 @@ The PNGs were cut from the supplied sheet. A vector (SVG) or high-resolution ori
 Homepage hero: the logo emblem acts as a window onto `assets/hero-cat.mp4` (720p, 12 s, no sound, 1.6 MB). `assets/logo-mask.png` cuts the video to the emblem's shape, and the video plays in its natural colours. `assets/hero-cat-poster.jpg` shows while the video loads.
 Source: "A cat walking in jungle" from Pexels (https://www.pexels.com/video/a-cat-walking-in-jungle-13825391/). Free under the Pexels license; credit is appreciated but not required.
 
-Homepage "How you can help" icons: `assets/icons/*.mp4` (looping, with a white background that `mix-blend-mode: multiply` drops) and `*.png` stills for visitors who turn off motion. Recolored to the logo's espresso and amber from Flaticon's free animated icons [cat](https://www.flaticon.com/free-animated-icon/cat_17092353), [pet love](https://www.flaticon.com/free-animated-icon/pet-love_17539345) and [altruism](https://www.flaticon.com/free-animated-icon/altruism_18654308). Flaticon's free licence requires a visible credit. The credit sits in the homepage footer's copyright line (`footer-credit` in `index.html`). Keep it visible unless you subscribe to Flaticon Premium.
+Homepage "How you can help" icons: `assets/icons/*.mp4` (looping, with a white background that `mix-blend-mode: multiply` drops) and `*.png` stills for visitors who turn off motion. Recolored to the logo's espresso and amber from Flaticon's free animated icons [cat](https://www.flaticon.com/free-animated-icon/cat_17092353), [pet love](https://www.flaticon.com/free-animated-icon/pet-love_17539345) and [altruism](https://www.flaticon.com/free-animated-icon/altruism_18654308). Flaticon's free licence requires a visible credit. The credit is on `credits.html`, linked as "Credits" in every page's footer. Keep that page and link unless you subscribe to Flaticon Premium.
 
 Colors (set in `css/styles.css`): page background `#EDE8D0`, cards `#F7F4E8`, plus the logo's espresso `#3d3431`, amber `#e9a048`, deep amber `#e08f28`, cream `#f8f1ec` (light text on dark areas) and warm gray `#6e6763`.
 Fonts: Cormorant Garamond (headings, matches the wordmark) and Nunito Sans (body text).
