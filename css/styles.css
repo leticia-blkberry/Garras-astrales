@@ -236,9 +236,14 @@ img { max-width: 100%; display: block; }
 .icon-credit { margin: 12px 0 0; font-size: 0.78rem; color: var(--muted); text-align: right; }
 .icon-credit a { color: inherit; }
 
-.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-top: 32px; }
+.stats-caption {
+  margin: 40px 0 0; text-align: center; color: var(--amber-text);
+  font-weight: 800; font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase;
+}
+.stats-caption + .stats { margin-top: 8px; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px; margin-top: 32px; }
 .stat { text-align: center; padding: 20px; }
-.stat strong { display: block; font-family: "Cormorant Garamond", serif; font-size: 2.8rem; color: var(--amber-text); line-height: 1.1; }
+.stat strong { font-variant-numeric: lining-nums tabular-nums; display: block; font-family: "Cormorant Garamond", serif; font-size: 2.8rem; color: var(--amber-text); line-height: 1.1; }
 .stat span { color: var(--muted); }
 
 /* Cat cards */
@@ -265,6 +270,10 @@ img { max-width: 100%; display: block; }
 .tag { background: var(--amber-soft); color: var(--espresso); font-size: 0.78rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; }
 .tag--dark { background: var(--espresso); color: var(--cream); }
 .cat-body .btn { margin-top: auto; align-self: flex-start; }
+.cat-pair {
+  margin: 4px 0 8px; padding: 10px 14px; border-radius: 10px;
+  background: var(--amber-soft); color: var(--ink); font-size: 0.92rem;
+}
 
 /* Steps */
 .steps { counter-reset: step; list-style: none; padding: 0; display: grid; gap: 16px; }

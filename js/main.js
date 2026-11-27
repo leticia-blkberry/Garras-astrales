@@ -80,9 +80,10 @@
       '<div class="cat-photo">' + photo + "</div>" +
       '<div class="cat-body">' +
       "<h3>" + esc(cat.name) + "</h3>" +
-      '<p class="cat-meta">' + esc(cat.ageLabel) + " · " + esc(cat.sex) + "</p>" +
+      '<p class="cat-meta">' + [cat.sex, cat.ageLabel, cat.coat].filter(Boolean).map(esc).join(" · ") + "</p>" +
       '<div class="tags">' + tags + "</div>" +
       "<p>" + esc(cat.story) + "</p>" +
+      (cat.pair ? '<p class="cat-pair">' + esc(cat.pair) + "</p>" : "") +
       '<a class="btn btn--primary" href="contact.html?subject=' + subject + '">Meet ' + esc(cat.name.split(" ")[0]) + "</a>" +
       "</div></article>"
     );

@@ -1,10 +1,38 @@
 // Adoptable cats. Edit this list to update the Adopt page and the homepage preview.
 // Fields:
-//   name, age ("kitten" | "young" | "adult" | "senior"), ageLabel, sex,
-//   photo (path like "assets/cats/luna.jpg", or "" for the placeholder),
-//   traits (short tags), story, status ("available" | "pending"), featured (true shows on homepage)
-// NOTE: These are sample cats — replace with real residents.
+//   name, age ("kitten" | "young" | "adult" | "senior", used by the Adopt page filters),
+//   ageLabel, sex, coat (optional), photo (path like "assets/cats/kaya.jpg", or "" for the placeholder),
+//   traits (short tags), story, pair (optional note shown in a box, e.g. for related cats),
+//   status ("available" | "pending"), featured (true shows on homepage; the first three are used)
+// NOTE: Kaya and Beba are real. The cats after them are samples to replace or remove.
+var KAYA_BEBA = "Kaya and Beba are mother and daughter, each with her own special personality. They can each find their own forever home, or perhaps someone might fall in love with both!";
 window.GA_CATS = [
+  {
+    name: "Kaya",
+    age: "adult",
+    ageLabel: "2–3 years old",
+    sex: "Female",
+    coat: "Tuxedo",
+    photo: "",
+    traits: ["Affectionate", "Cuddly", "Clever"],
+    story: "Kaya is a loving mama with a heart as sweet as they come. She's affectionate, cuddly, and clever, and loves sharing cozy moments with her favorite people. Now that she's raised her little one, it's her turn to be spoiled with love and find a family she can call her own!",
+    pair: KAYA_BEBA,
+    status: "available",
+    featured: true
+  },
+  {
+    name: "Beba",
+    age: "young",
+    ageLabel: "1.5–2 years old",
+    sex: "Female",
+    coat: "Tortoiseshell",
+    photo: "",
+    traits: ["Playful", "Confident", "Full of character"],
+    story: "Beba is Kaya's daughter and a playful little character with a personality all her own! She's confident, a bit bossy, and definitely knows what she wants. But beneath that independent spirit is a lovely girl with a sweet side that makes her extra special. If you appreciate a cat with character, charm, and plenty of personality, Beba might be your girl!",
+    pair: KAYA_BEBA,
+    status: "available",
+    featured: true
+  },
   {
     name: "Luna",
     age: "young",
