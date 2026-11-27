@@ -116,7 +116,8 @@ img { max-width: 100%; display: block; }
 /* Header: menu split in two with the logo in the middle */
 .site-header {
   position: relative; z-index: 50;
-  background: var(--bg);
+  /* same peach-to-cream gradient as the page, as seen behind "Meet the cats" */
+  background: var(--bg) linear-gradient(135deg, var(--amber-soft), var(--bg)) fixed;
   border-bottom: 1px solid var(--line);
 }
 .site-header .container { position: relative; padding-top: 14px; padding-bottom: 14px; }
@@ -478,3 +479,24 @@ input:focus, select:focus, textarea:focus, .btn:focus-visible, .chip:focus-visib
 /* Two-colour titles: one or two highlighted words */
 h1 .hl, h2 .hl { color: var(--amber-title); }
 .hero .hl, .hero-portal .hl, .cta-band .hl { color: var(--amber); }
+
+/* "Can't adopt right now?" section: sleeping-cat photo under a dark overlay */
+.help-banner {
+  position: relative; isolation: isolate; color: var(--cream);
+  background:
+    linear-gradient(180deg, rgba(43, 36, 32, 0.75), rgba(43, 36, 32, 0.82)),   /* 0.75 keeps light text 4.5:1 over the white bed */
+    var(--espresso-deep) url("../assets/help-banner.jpg") center 35% / cover no-repeat;
+}
+.help-banner h2 { color: var(--cream); }
+.help-banner h2 .hl { color: var(--amber); }
+.help-banner .center .lead { color: var(--on-dark); }
+.help-banner :focus-visible { outline-color: var(--amber); }
+.help-banner .card, .help-banner .share-strip { color: var(--ink); }
+.help-banner .card :focus-visible, .help-banner .share-strip :focus-visible { outline-color: var(--espresso); }
+
+/* Footer: content spans the full width, with comfortable side padding */
+.site-footer > .container {
+  max-width: none;
+  padding-left: max(24px, 5vw, env(safe-area-inset-left, 0px));
+  padding-right: max(24px, 5vw, env(safe-area-inset-right, 0px));
+}
