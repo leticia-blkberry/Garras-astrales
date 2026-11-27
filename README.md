@@ -11,9 +11,10 @@ Open `index.html` in a browser to preview. Hosted on **SiteGround** (see below).
 | `get-involved.html` | Foster, volunteer, donate |
 | `about.html` | Mission, story, values |
 | `contact.html` | Contact form + other contact info |
+| `cat.html` | One page per cat, e.g. `cat.html?c=kaya`, built from `js/cats.js` (the name becomes the link: "Orión" → `orion`) |
 
 ## Updating the cats
-Edit `js/cats.js`. Each cat has a name, age group, traits, story, and optional photo.
+Edit `js/cats.js`; each cat automatically gets a card on the Adopt page and its own page at `cat.html?c=<name>`. Each cat has a name, age group, traits, story, and optional photo.
 Put photos in `assets/cats/` and set `photo: "assets/cats/luna.jpg"`. Set `featured: true` to show a cat on the homepage.
 
 ## Still to fill in
@@ -96,7 +97,7 @@ For later updates, upload just the changed files to the same place in `public_ht
 ## Accessibility (WCAG 2.1 AA / ADA)
 The site is built to meet WCAG 2.1 level AA, the standard used for ADA compliance. Keep these in place when editing:
 - **Contrast:** text on light backgrounds uses `--ink`, `--muted` or `--amber-text` (`#8a4b0b`). The bright amber (`--amber`, `--amber-deep`) is only for text on dark backgrounds or for decoration, never for text on cream.
-- **Logo shadow (homepage):** the emblem silhouette that follows the visitor down the page is capped at 7% opacity (`MAX_OPACITY` in `js/main.js`). `--muted` was darkened to `#5f5854` so grey text stays above 4.5:1 even where the shadow passes behind it; raise the opacity only after re-checking contrast. It is hidden for reduced motion and when animations are paused.
+- **Logo shadow (all pages):** the emblem silhouette that follows the visitor down the page is capped at 7% opacity (`MAX_OPACITY` in `js/main.js`). `--muted` was darkened to `#5f5854` so grey text stays above 4.5:1 even where the shadow passes behind it; raise the opacity only after re-checking contrast. It is hidden for reduced motion and when animations are paused.
 - **Motion:** every page has a "Pause animations" button in the top bar that stops all video and animation and remembers the choice. Visitors whose device asks for reduced motion start paused. Any new looping video or animation must respect the `motion-paused` class.
 - **Keyboard:** "Skip to content" is the first tab stop, every control has a visible focus ring (espresso on light areas, amber on dark ones), and the phone menu is a real button.
 - **Headings** must fit on one or two lines, never three, at any screen width. The homepage headline size is tuned for this; keep new headings short or check them at phone and desktop widths.
@@ -105,3 +106,6 @@ The site is built to meet WCAG 2.1 level AA, the standard used for ADA complianc
 - **Images and video:** decorative images have empty `alt`; the hero and icon videos are silent and hidden from screen readers.
 
 Checked with axe-core 4.10 (no violations at desktop and phone width on every page). Automated tools catch only part of WCAG, so a manual check with a screen reader (VoiceOver or NVDA) is worth doing before launch, and again whenever real cat photos are added: each needs meaningful `alt` text (set from the cat's name automatically).
+
+## Mobile and screen sizes
+Checked on every page (including cat pages) at every width from 280px to 2000px in 20px steps, plus common phone and tablet sizes: no sideways scrolling, nothing sticking out, no text under 12px, headings never longer than two lines, and every button or link at least 24×24px. The phone menu opens and closes with the Menu button, closes with Escape (focus returns to the button) or a tap outside, and resets when the window is widened to desktop.

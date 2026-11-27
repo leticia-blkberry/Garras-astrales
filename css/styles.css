@@ -219,7 +219,7 @@ img { max-width: 100%; display: block; }
 }
 /* Grids & cards */
 .grid { display: grid; gap: 24px; }
-.grid--3 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.grid--3 { grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); }
 .grid--2 { grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); }
 
 .card {
@@ -273,18 +273,32 @@ img { max-width: 100%; display: block; }
   align-self: flex-start; margin: 0; padding: 3px 12px; border-radius: 999px;
   background: var(--espresso); color: var(--cream); font-size: 0.8rem; font-weight: 700;
 }
-.cat-story p { margin: 0 0 0.6em; }
-.cat-story p:last-child { margin-bottom: 0; }
-/* Collapsed: first three lines of the story only */
-.cat-story.is-clamped { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; line-clamp: 3; overflow: hidden; }
+/* Cards show the first three lines of the story; "Read more" opens the cat's own page */
+.cat-story { margin: 0; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; line-clamp: 3; overflow: hidden; }
+.cat-name { color: inherit; text-decoration: none; }
+.cat-name:hover { text-decoration: underline; }
 .cat-actions { margin-top: auto; padding-top: 6px; display: flex; align-items: center; flex-wrap: wrap; gap: 4px 16px; }
-.cat-more {
-  background: none; border: 0; padding: 8px 2px; min-height: 24px;
-  font: inherit; font-weight: 700; color: var(--link); text-decoration: underline; cursor: pointer;
-}
+.cat-more { display: inline-block; padding: 8px 2px; font-weight: 700; color: var(--link); }
 .cat-more:hover { color: var(--ink); }
-/* When a story is opened, only that card grows; the others keep their size */
-.grid:has(.cat-story:not(.is-clamped)) { align-items: start; }
+
+/* Cat profile page */
+.cat-hero { padding-top: 32px; }
+.breadcrumb ol { list-style: none; margin: 0 0 24px; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; font-size: 0.92rem; color: var(--muted); }
+.breadcrumb li + li::before { content: "›"; margin-right: 6px; }
+.breadcrumb a { color: var(--link); font-weight: 700; }
+.cat-profile { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 48px; align-items: start; }
+.cat-profile-photo { padding: 0; overflow: hidden; aspect-ratio: 4 / 5; display: grid; place-items: center;
+  background: linear-gradient(135deg, var(--amber-soft), var(--bg)); }
+.cat-profile-photo img { width: 100%; height: 100%; object-fit: cover; }
+.cat-profile-photo img.placeholder { width: 46%; height: auto; opacity: 0.4; }
+.cat-profile-body { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.cat-profile-body h1 { margin: 0; color: var(--espresso); }
+.cat-profile-story { font-size: 1.08rem; max-width: 60ch; }
+.cat-profile-story p { margin: 0 0 0.8em; }
+@media (max-width: 760px) {
+  .cat-profile { grid-template-columns: 1fr; gap: 24px; }
+  .cat-profile-photo { aspect-ratio: 3 / 2; }
+}
 
 /* Steps */
 .steps { counter-reset: step; list-style: none; padding: 0; display: grid; gap: 16px; }
@@ -352,14 +366,11 @@ input:focus, select:focus, textarea:focus, .btn:focus-visible, .chip:focus-visib
 .motion-toggle:hover { border-color: var(--amber); color: var(--amber); }
 .motion-toggle svg { width: 14px; height: 14px; flex: none; }
 .motion-paused *, .motion-paused *::before, .motion-paused *::after { animation-play-state: paused !important; }
-@media (max-width: 360px) {
-  .top-bar-ig span { display: none; }      /* icon only; the link keeps its aria-label */
-  .top-bar-ig { padding: 4px 6px; }
-}
 
-/* Homepage: the hero emblem's silhouette follows the visitor down the page like a soft shadow
+
+/* Every page: the hero emblem's silhouette follows the visitor down the page like a soft shadow
    on the section backgrounds. It sits above section backgrounds and below their content. */
-.has-logo-shadow main > section:not(.hero-portal) > .container { position: relative; z-index: 1; }
+.has-logo-shadow main > section > .container { position: relative; z-index: 1; }
 .logo-shadow {
   position: fixed; top: 0; left: 0; z-index: 0; pointer-events: none;
   width: min(560px, 70vw); aspect-ratio: 394 / 408;
@@ -370,3 +381,25 @@ input:focus, select:focus, textarea:focus, .btn:focus-visible, .chip:focus-visib
 }
 @media (prefers-reduced-motion: reduce) { .logo-shadow { display: none; } }
 .motion-paused .logo-shadow { display: none; }
+
+/* Links that stand alone in a card get a comfortable tap height (WCAG 2.5.8) */
+.card > a:not(.btn) { display: inline-block; padding: 4px 0; }
+
+/* Very narrow screens (under 340px): keep headings to two lines */
+@media (max-width: 340px) {
+  .hero-portal h1 { font-size: 1.7rem; }
+  h2 { font-size: 1.6rem; }
+}
+
+/* Instagram shown as its icon only (the link keeps a spoken label) */
+.social-ig {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; border-radius: 999px; color: inherit; vertical-align: middle;
+}
+.social-ig svg { width: 22px; height: 22px; }
+.social-ig:hover { color: var(--amber); }
+.contact-ig .social-ig { color: var(--espresso); margin-left: 2px; }
+.contact-ig .social-ig:hover { color: var(--link); }
+@media (max-width: 300px) {
+  .hero-portal h1 { font-size: 1.5rem; }
+}

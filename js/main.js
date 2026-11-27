@@ -3,10 +3,23 @@
   var toggle = document.querySelector(".nav-toggle");
   var nav = document.querySelector(".site-nav");
   if (toggle && nav) {
-    toggle.addEventListener("click", function () {
-      var open = nav.classList.toggle("open");
+    var setMenu = function (open) {
+      nav.classList.toggle("open", open);
       toggle.setAttribute("aria-expanded", String(open));
+    };
+    toggle.addEventListener("click", function () { setMenu(!nav.classList.contains("open")); });
+    // Escape closes the menu and puts focus back on the button
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && nav.classList.contains("open")) { setMenu(false); toggle.focus(); }
     });
+    // A tap outside the header closes it
+    document.addEventListener("click", function (e) {
+      if (nav.classList.contains("open") && !e.target.closest(".site-header")) setMenu(false);
+    });
+    // Growing the window to desktop width resets it
+    var desktop = window.matchMedia("(min-width: 881px)");
+    var reset = function () { if (desktop.matches) setMenu(false); };
+    if (desktop.addEventListener) desktop.addEventListener("change", reset); else desktop.addListener(reset);
   }
 
   // Twinkling stars in hero sections
@@ -53,17 +66,20 @@
     });
   }
 
-  // Homepage: the emblem's silhouette drifts down the page as a soft shadow,
-  // crossing from side to side into each section. Scroll-linked, so it only moves when the visitor scrolls.
-  var heroPortal = document.querySelector(".hero-portal");
-  if (heroPortal) {
+  // The emblem's silhouette drifts down the page as a soft shadow, crossing from side to side
+  // into each section. On the homepage it leaves from the hero emblem; on other pages from the hero.
+  // Scroll-linked, so it only moves when the visitor scrolls.
+  var heroPortal = document.querySelector(".hero-portal, main > .hero, main > .cat-hero");
+  var shadowSections = heroPortal ? [].slice.call(document.querySelectorAll("main > section")).filter(function (s) { return s !== heroPortal; }) : [];
+  if (heroPortal && shadowSections.length) {
     document.body.classList.add("has-logo-shadow");
     var shadow = document.createElement("div");
     shadow.className = "logo-shadow";
     shadow.setAttribute("aria-hidden", "true");
     document.body.appendChild(shadow);
     var footer = document.querySelector(".site-footer");
-    var sections = [].slice.call(document.querySelectorAll("main > section:not(.hero-portal)"));
+    var sections = shadowSections;
+    var emblem = heroPortal.querySelector(".portal");
     var MAX_OPACITY = 0.07;      // keep in step with the contrast check in README (Accessibility)
     var ticking = false;
 
@@ -77,8 +93,9 @@
         var top = sec.offsetTop, h = sec.offsetHeight;
         return { at: top + h / 2, x: i % 2 === 0 ? vw * 0.62 : vw * 0.04 - size * 0.15, rot: i % 2 === 0 ? 10 : -10 };
       });
-      var heroRect = heroPortal.querySelector(".portal").getBoundingClientRect();
-      var start = { at: heroPortal.offsetTop + heroPortal.offsetHeight / 2, x: heroRect.left + heroRect.width / 2 - size / 2, rot: 0 };
+      var startX = vw * 0.04 - size * 0.15;          // other pages: start on the left
+      if (emblem) { var r = emblem.getBoundingClientRect(); startX = r.left + r.width / 2 - size / 2; }
+      var start = { at: heroPortal.offsetTop + heroPortal.offsetHeight / 2, x: startX, rot: 0 };
       stops.unshift(start);
       var a = stops[0], b = stops[stops.length - 1];
       for (var i = 0; i < stops.length - 1; i++) {
@@ -119,57 +136,49 @@
     return d.innerHTML;
   }
 
-  var cardCount = 0;
-  function catCard(cat) {
-    var id = "cat-story-" + (++cardCount);
-    var photo = cat.photo
+  // Each cat has its own page: cat.html?c=<slug>, where the slug comes from the name ("Orión" -> "orion")
+  function slugOf(cat) {
+    return (cat.slug || cat.name).normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  }
+  function catUrl(cat) { return "cat.html?c=" + encodeURIComponent(slugOf(cat)); }
+  function catPhoto(cat) {
+    return cat.photo
       ? '<img src="' + esc(cat.photo) + '" alt="Photo of ' + esc(cat.name) + '" loading="lazy">'
       : PLACEHOLDER;
+  }
+  function catTags(cat) {
     var tags = cat.traits.map(function (t) { return '<span class="tag">' + esc(t) + "</span>"; }).join("");
     if (cat.status === "pending") tags = '<span class="tag tag--dark">Adoption pending</span>' + tags;
-    var subject = encodeURIComponent("Adoption inquiry: " + cat.name);
+    return tags;
+  }
+  function catMeta(cat) { return [cat.sex, cat.ageLabel, cat.coat].filter(Boolean).map(esc).join(" · "); }
+  function meetUrl(cat) { return "contact.html?subject=" + encodeURIComponent("Adoption inquiry: " + cat.name); }
+  function firstName(cat) { return esc(cat.name.split(" ")[0]); }
+
+  function catCard(cat) {
     return (
       '<article class="card cat-card">' +
-      '<div class="cat-photo">' + photo + "</div>" +
+      '<div class="cat-photo">' + catPhoto(cat) + "</div>" +
       '<div class="cat-body">' +
-      "<h3>" + esc(cat.name) + "</h3>" +
-      '<p class="cat-meta">' + [cat.sex, cat.ageLabel, cat.coat].filter(Boolean).map(esc).join(" · ") + "</p>" +
-      '<div class="tags">' + tags + "</div>" +
+      '<h3><a class="cat-name" href="' + catUrl(cat) + '">' + esc(cat.name) + "</a></h3>" +
+      '<p class="cat-meta">' + catMeta(cat) + "</p>" +
+      '<div class="tags">' + catTags(cat) + "</div>" +
       (cat.pairShort ? '<p class="cat-pair">' + esc(cat.pairShort) + "</p>" : "") +
-      '<div class="cat-story is-clamped" id="' + id + '">' +
-      "<p>" + esc(cat.story) + "</p>" +
-      (cat.pair ? "<p>" + esc(cat.pair) + "</p>" : "") +
-      "</div>" +
+      '<p class="cat-story">' + esc(cat.story) + "</p>" +
       '<div class="cat-actions">' +
-      '<a class="btn btn--primary" href="contact.html?subject=' + subject + '">Meet ' + esc(cat.name.split(" ")[0]) + "</a>" +
-      '<button class="cat-more" type="button" aria-expanded="false" aria-controls="' + id + '" hidden>Read more<span class="sr-only"> about ' + esc(cat.name) + "</span></button>" +
+      '<a class="btn btn--primary" href="' + meetUrl(cat) + '">Meet ' + firstName(cat) + "</a>" +
+      '<a class="cat-more" href="' + catUrl(cat) + '">Read more<span class="sr-only"> about ' + esc(cat.name) + "</span></a>" +
       "</div>" +
       "</div></article>"
     );
   }
-
-  // Show "Read more" only where the story is cut off, and let it expand in place
-  function enhanceCards(container) {
-    container.querySelectorAll(".cat-card").forEach(function (card) {
-      var story = card.querySelector(".cat-story"), more = card.querySelector(".cat-more");
-      if (!story || !more) return;
-      more.hidden = story.scrollHeight <= story.clientHeight + 2;
-      more.addEventListener("click", function () {
-        var open = more.getAttribute("aria-expanded") === "true";
-        story.classList.toggle("is-clamped", open);
-        more.setAttribute("aria-expanded", String(!open));
-        more.firstChild.textContent = open ? "Read more" : "Show less";
-      });
-    });
-  }
-
 
   var cats = window.GA_CATS || [];
 
   var featured = document.getElementById("featured-cats");
   if (featured) {
     featured.innerHTML = cats.filter(function (c) { return c.featured; }).slice(0, 3).map(catCard).join("");
-    enhanceCards(featured);
   }
 
   var list = document.getElementById("cat-list");
@@ -179,7 +188,6 @@
       list.innerHTML = shown.length
         ? shown.map(catCard).join("")
         : '<p class="lead">No cats in this group right now — check back soon!</p>';
-      enhanceCards(list);
     };
     document.querySelectorAll(".filters .chip").forEach(function (chip) {
       chip.addEventListener("click", function () {
@@ -189,6 +197,43 @@
       });
     });
     render("all");
+  }
+
+  // Cat profile page (cat.html?c=<slug>)
+  var profile = document.getElementById("cat-profile");
+  if (profile) {
+    var wanted = new URLSearchParams(window.location.search).get("c") || "";
+    var cat = cats.filter(function (c) { return slugOf(c) === wanted.toLowerCase(); })[0];
+    var crumb = document.getElementById("crumb-name");
+    var others = document.getElementById("other-cats");
+    if (cat) {
+      document.title = cat.name + " | Garras Astrales Collective";
+      crumb.textContent = cat.name;
+      profile.innerHTML =
+        '<div class="cat-profile-photo card">' + catPhoto(cat) + "</div>" +
+        '<div class="cat-profile-body">' +
+        "<h1>" + esc(cat.name) + "</h1>" +
+        '<p class="cat-meta">' + catMeta(cat) + "</p>" +
+        '<div class="tags">' + catTags(cat) + "</div>" +
+        (cat.pairShort ? '<p class="cat-pair">' + esc(cat.pairShort) + "</p>" : "") +
+        '<div class="cat-profile-story"><p>' + esc(cat.story) + "</p>" +
+        (cat.pair ? "<p>" + esc(cat.pair) + "</p>" : "") + "</div>" +
+        '<div class="btn-row">' +
+        '<a class="btn btn--primary" href="' + meetUrl(cat) + '">Meet ' + firstName(cat) + "</a>" +
+        '<a class="btn btn--ghost" href="adopt.html">See all cats</a>' +
+        "</div></div>";
+      // related cats first (same pair note), then the rest
+      var rest = cats.filter(function (c) { return c !== cat; });
+      rest.sort(function (a, b) { return (b.pair && b.pair === cat.pair) - (a.pair && a.pair === cat.pair); });
+      if (rest.length) others.innerHTML = rest.map(catCard).join("");
+      else document.getElementById("other-cats-section").hidden = true;
+    } else {
+      document.title = "Cat not found | Garras Astrales Collective";
+      profile.innerHTML =
+        '<div class="cat-profile-body"><h1>We couldn\'t find that cat</h1>' +
+        '<p class="lead">They may have found their forever home already! Here are the cats still looking.</p></div>';
+      others.innerHTML = cats.map(catCard).join("");
+    }
   }
 
   // Prefill contact subject from ?subject=
