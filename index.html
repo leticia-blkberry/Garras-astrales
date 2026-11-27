@@ -39,11 +39,9 @@
     </div>
   </header>
   <main id="main">
-    <section class="hero hero--home">
-      <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="assets/hero-cat-poster.jpg" aria-hidden="true">
-        <source src="assets/hero-cat.mp4" type="video/mp4">
-      </video>
-      <div class="container hero-center">
+    <section class="hero-portal">
+      <video class="hero-portal-bg" autoplay muted loop playsinline preload="auto" poster="assets/hero-cat-poster.jpg" aria-hidden="true"><source src="assets/hero-cat.mp4" type="video/mp4"></video>
+      <div class="container hero-portal-grid">
         <div>
           <p class="eyebrow">A collective devoted to rescuing and caring for cats</p>
           <h1>Every cat deserves a place among the stars.</h1>
@@ -52,6 +50,11 @@
             <a class="btn btn--primary" href="adopt.html">Meet our cats</a>
             <a class="btn btn--ghost" href="get-involved.html#foster">Become a foster</a>
           </div>
+        </div>
+        <div class="portal" aria-hidden="true">
+          <div class="portal-fill"></div>
+          <video class="portal-dark" autoplay muted loop playsinline preload="auto" poster="assets/hero-cat-poster.jpg"><source src="assets/hero-cat.mp4" type="video/mp4"></video>
+          <video class="portal-orange" autoplay muted loop playsinline preload="auto" poster="assets/hero-cat-poster.jpg"><source src="assets/hero-cat.mp4" type="video/mp4"></video>
         </div>
       </div>
     </section>
