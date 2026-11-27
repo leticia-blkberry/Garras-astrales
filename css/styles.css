@@ -442,9 +442,12 @@ input:focus, select:focus, textarea:focus, .btn:focus-visible, .chip:focus-visib
 }
 
 /* Homepage: impact band */
-.impact { padding: 48px 0; }
-.impact .lead { margin-top: 0; }
-.impact .stats { margin-top: 20px; }
+.impact { padding: 36px 0 28px; }
+.impact h2 { margin-bottom: 0.2em; }
+.impact .lead { margin: 0; }
+.impact .stats { margin-top: 12px; gap: 8px 16px; }
+.impact .stat { padding: 8px; }
+.impact .stat span { display: block; line-height: 1.35; }
 
 /* Homepage: spread the word */
 .share-strip {
