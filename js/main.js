@@ -127,9 +127,15 @@
         var targetW = (f.width * EMBLEM_IN_LOCKUP.w) / EMBLEM_IN_SHADOW;          // shadow width that matches the emblem
         var cx = f.left + f.width * (EMBLEM_IN_LOCKUP.x + EMBLEM_IN_LOCKUP.w / 2);
         var cy = f.top + f.height * (EMBLEM_IN_LOCKUP.y + EMBLEM_IN_LOCKUP.h / 2);
-        // 0 while the footer logo is still LEAD px below the screen, 1 once it is fully in view
+        // 0 while the footer logo is still LEAD px below the screen, 1 once it is fully in view --
+        // or by the time the page can't scroll any further, so the hand-off always finishes
         var LEAD = vh * 0.45;
-        var p = Math.min(1, Math.max(0, (vh + LEAD - f.top) / (f.height * 0.7 + vh * 0.3 + LEAD)));
+        var logoTop = f.top + window.scrollY;
+        var startY = logoTop - vh - LEAD;
+        var maxY = document.documentElement.scrollHeight - vh;
+        var endY = Math.min(startY + f.height * 0.7 + vh * 0.3 + LEAD, maxY - 2);
+        var p = endY <= startY ? (window.scrollY >= endY ? 1 : 0)
+                               : Math.min(1, Math.max(0, (window.scrollY - startY) / (endY - startY)));
         var e = p * p * (3 - 2 * p);
         x += (cx - size / 2 - x) * e;
         ty += (cy - sh / 2 - ty) * e;
