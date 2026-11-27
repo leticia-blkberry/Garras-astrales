@@ -13,7 +13,7 @@
   --muted: #5f5854;        /* darkened from the logo grey so it stays 4.5:1+ even over the scrolling logo shadow */         /* logo "COLLECTIVE" gray, darkened for contrast */
   --link: #8a4b0b;          /* amber darkened to 5.5:1 on --bg for readable links (WCAG AA) */
   --amber-text: #8a4b0b;
-  --amber-title: #a96a18;   /* highlighted words in titles on light backgrounds: 3.2:1+ (large-text AA) */    /* amber for text on light backgrounds; bright amber is only for dark ones */
+  --amber-title: #a06417;   /* highlighted words in titles on light backgrounds: 3.3:1+ even on the peach page background (large-text AA) */    /* amber for text on light backgrounds; bright amber is only for dark ones */
   --on-dark: #e9dfd7;
   --line: #dcd4b8;
   --radius: 16px;
@@ -31,9 +31,10 @@
 
 body {
   margin: 0;
+  /* same peach-to-cream gradient as the cat photo placeholder, fixed so it stays even while scrolling */
+  background: var(--bg) linear-gradient(135deg, var(--amber-soft), var(--bg)) fixed;
   font-family: "Nunito Sans", system-ui, -apple-system, Segoe UI, sans-serif;
   color: var(--ink);
-  background: var(--bg);
   line-height: 1.6;
 }
 
