@@ -328,7 +328,7 @@ input:focus, select:focus, textarea:focus, .btn:focus-visible, .chip:focus-visib
   outline: 3px solid var(--espresso); outline-offset: 2px;
 }
 .top-bar :focus-visible { outline-color: var(--espresso); }
-.site-footer :focus-visible, .cta-band :focus-visible, .hero :focus-visible, .hero-portal :focus-visible { outline-color: var(--amber); }
+.cta-band :focus-visible, .hero :focus-visible, .hero-portal :focus-visible { outline-color: var(--amber); }
 .form-note { font-size: 0.9rem; color: var(--muted); }
 .form-status { font-weight: 700; color: var(--link); }
 
@@ -341,15 +341,17 @@ input:focus, select:focus, textarea:focus, .btn:focus-visible, .chip:focus-visib
 .cta-band .card p { color: var(--ink); }
 
 /* Footer */
-.site-footer { background: var(--espresso-deep); color: var(--on-dark); padding: 56px 0 24px; margin-top: 72px; }
-.site-footer a { color: var(--cream); }
+/* Light footer so the full-colour logo reads; an orange rule ties it to the top bar */
+.site-footer { background: var(--paper); color: var(--ink); padding: 56px 0 24px; margin-top: 72px;
+  border-top: 4px solid var(--amber-deep); box-shadow: 0 -6px 18px rgba(43, 36, 32, 0.06); }
+.site-footer a { color: var(--link); }
 .site-footer h2 {
-  color: var(--amber); font-size: 0.85rem; font-family: "Nunito Sans", sans-serif; text-transform: uppercase; letter-spacing: 0.2em;
+  color: var(--amber-text); font-size: 0.85rem; font-family: "Nunito Sans", sans-serif; text-transform: uppercase; letter-spacing: 0.2em;
 }
 .site-footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
-.footer-logo { width: 180px; margin-bottom: 16px; filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.45)); }
+.footer-logo { width: 180px; margin-bottom: 16px; filter: var(--shadow-img); }
 .footer-grid { display: grid; gap: 32px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
-.footer-bottom { border-top: 1px solid rgba(248,241,236,0.14); margin-top: 32px; padding-top: 20px; font-size: 0.85rem; }
+.footer-bottom { border-top: 1px solid var(--line); color: var(--muted); margin-top: 32px; padding-top: 20px; font-size: 0.85rem; }
 .footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
 /* "Credits" link (icon, video and photo credits live on credits.html) */
 .footer-credit { color: inherit; display: inline-block; padding: 2px 0; }
@@ -395,7 +397,7 @@ input:focus, select:focus, textarea:focus, .btn:focus-visible, .chip:focus-visib
 /* the footer emblem's own colours, faded in as the shadow lands on the footer logo */
 .logo-shadow::after {
   content: ""; position: absolute; inset: 0;
-  background: url("../assets/logo-mark-light.png") center / contain no-repeat;
+  background: url("../assets/logo-mark.png") center / contain no-repeat;
   opacity: var(--morph);
 }
 @media (prefers-reduced-motion: reduce) { .logo-shadow { display: none; } }
@@ -416,7 +418,7 @@ input:focus, select:focus, textarea:focus, .btn:focus-visible, .chip:focus-visib
   width: 36px; height: 36px; border-radius: 999px; color: inherit; vertical-align: middle;
 }
 .social-ig svg { width: 22px; height: 22px; }
-.social-ig:hover { color: var(--amber); }
+.social-ig:hover { color: var(--link); }
 .contact-ig .social-ig { color: var(--espresso); margin-left: 2px; }
 .contact-ig .social-ig:hover { color: var(--link); }
 @media (max-width: 300px) {
@@ -475,4 +477,4 @@ input:focus, select:focus, textarea:focus, .btn:focus-visible, .chip:focus-visib
 
 /* Two-colour titles: one or two highlighted words */
 h1 .hl, h2 .hl { color: var(--amber-title); }
-.hero .hl, .hero-portal .hl, .cta-band .hl, .site-footer .hl { color: var(--amber); }
+.hero .hl, .hero-portal .hl, .cta-band .hl { color: var(--amber); }
