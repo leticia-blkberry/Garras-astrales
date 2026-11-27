@@ -27,14 +27,6 @@
     document.querySelectorAll("video[autoplay]").forEach(function (v) { v.removeAttribute("autoplay"); v.pause(); });
   }
 
-  // Home hero: keep the two emblem videos in step with each other
-  var portalLead = document.querySelector(".portal-dark"), portalFollow = document.querySelector(".portal-orange");
-  if (portalLead && portalFollow) {
-    portalLead.addEventListener("timeupdate", function () {
-      if (Math.abs(portalFollow.currentTime - portalLead.currentTime) > 0.08) portalFollow.currentTime = portalLead.currentTime;
-    });
-  }
-
   // Footer year
   document.querySelectorAll("[data-year]").forEach(function (el) {
     el.textContent = new Date().getFullYear();

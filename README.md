@@ -50,7 +50,7 @@ assets/          Logos (see below)
 
 The PNGs were cut from the supplied sheet. A vector (SVG) or high-resolution original from the designer would look sharper on large screens.
 
-Homepage hero: the logo emblem acts as a window onto `assets/hero-cat.mp4` (720p, 12 s, no sound, 1.6 MB). `assets/logo-mask-dark.png` and `assets/logo-mask-orange.png` cut the video into the emblem's two colour parts: the dark cat stays espresso with a soft video texture and the kitten plays inside the orange cat. `assets/hero-cat-poster.jpg` shows while the video loads.
+Homepage hero: the logo emblem acts as a window onto `assets/hero-cat.mp4` (720p, 12 s, no sound, 1.6 MB). `assets/logo-mask.png` cuts the video to the emblem's shape, and the video plays in its natural colours. `assets/hero-cat-poster.jpg` shows while the video loads.
 Source: "A cat walking in jungle" from Pexels (https://www.pexels.com/video/a-cat-walking-in-jungle-13825391/). Free under the Pexels license; credit is appreciated but not required.
 
 Homepage "How you can help" icons: `assets/icons/*.mp4` (looping, with a white background that `mix-blend-mode: multiply` drops) and `*.png` stills for visitors who turn off motion. Recolored to the logo's espresso and amber from Flaticon's free animated icons [cat](https://www.flaticon.com/free-animated-icon/cat_17092353), [pet love](https://www.flaticon.com/free-animated-icon/pet-love_17539345) and [altruism](https://www.flaticon.com/free-animated-icon/altruism_18654308). Flaticon's free licence requires the credit line shown under the cards; it can be removed with a Flaticon Premium subscription.
