@@ -12,7 +12,8 @@
   --ink: #3d3431;
   --muted: #5f5854;        /* darkened from the logo grey so it stays 4.5:1+ even over the scrolling logo shadow */         /* logo "COLLECTIVE" gray, darkened for contrast */
   --link: #8a4b0b;          /* amber darkened to 5.5:1 on --bg for readable links (WCAG AA) */
-  --amber-text: #8a4b0b;    /* amber for text on light backgrounds; bright amber is only for dark ones */
+  --amber-text: #8a4b0b;
+  --amber-title: #a96a18;   /* highlighted words in titles on light backgrounds: 3.2:1+ (large-text AA) */    /* amber for text on light backgrounds; bright amber is only for dark ones */
   --on-dark: #e9dfd7;
   --line: #dcd4b8;
   --radius: 16px;
@@ -470,3 +471,7 @@ input:focus, select:focus, textarea:focus, .btn:focus-visible, .chip:focus-visib
 .credits h2 { margin-top: 1.4em; font-size: 1.6rem; }
 .credits ul { padding-left: 1.2em; }
 .credits li { margin: 4px 0; }
+
+/* Two-colour titles: one or two highlighted words */
+h1 .hl, h2 .hl { color: var(--amber-title); }
+.hero .hl, .hero-portal .hl, .cta-band .hl, .site-footer .hl { color: var(--amber); }

@@ -242,7 +242,7 @@
       profile.innerHTML =
         '<div class="cat-profile-photo card">' + catPhoto(cat) + "</div>" +
         '<div class="cat-profile-body">' +
-        "<h1>" + esc(cat.name) + "</h1>" +
+        '<h1>Meet <span class="hl">' + esc(cat.name) + "</span></h1>" +
         '<p class="cat-meta">' + catMeta(cat) + "</p>" +
         '<div class="tags">' + catTags(cat) + "</div>" +
         (cat.pairShort ? '<p class="cat-pair">' + esc(cat.pairShort) + "</p>" : "") +
@@ -260,7 +260,7 @@
     } else {
       document.title = "Cat not found | Garras Astrales Collective";
       profile.innerHTML =
-        '<div class="cat-profile-body"><h1>We couldn\'t find that cat</h1>' +
+        '<div class="cat-profile-body"><h1>We couldn\'t find <span class="hl">that cat</span></h1>' +
         '<p class="lead">They may have found their forever home already! Here are the cats still looking.</p></div>';
       others.innerHTML = cats.map(catCard).join("");
     }
