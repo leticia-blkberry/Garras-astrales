@@ -22,9 +22,35 @@
     }
   });
 
-  // Respect "reduce motion": stop decorative videos on their first frame
-  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    document.querySelectorAll("video[autoplay]").forEach(function (v) { v.removeAttribute("autoplay"); v.pause(); });
+  // Pause / play all looping video and animation (WCAG 2.2.2).
+  // Starts paused for visitors who ask their device for reduced motion; the choice is remembered.
+  var motionButton = document.querySelector(".motion-toggle");
+  var saved = null;
+  try { saved = localStorage.getItem("ga-motion"); } catch (e) {}
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function setMotion(paused, remember) {
+    document.documentElement.classList.toggle("motion-paused", paused);
+    document.querySelectorAll("video").forEach(function (v) {
+      if (paused) { v.pause(); } else { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+    });
+    if (motionButton) {
+      motionButton.dataset.paused = String(paused);
+      motionButton.querySelector("span").textContent = paused ? "Play animations" : "Pause animations";
+      motionButton.querySelector("svg").innerHTML = paused
+        ? '<path d="M4 2.5v11l9-5.5z" fill="currentColor"/>'
+        : '<rect x="3" y="2" width="3.5" height="12" rx="1" fill="currentColor"/><rect x="9.5" y="2" width="3.5" height="12" rx="1" fill="currentColor"/>';
+    }
+    if (remember) { try { localStorage.setItem("ga-motion", paused ? "paused" : "playing"); } catch (e) {} }
+  }
+  var startPaused = saved ? saved === "paused" : reduce;
+  if (startPaused) {
+    document.querySelectorAll("video[autoplay]").forEach(function (v) { v.removeAttribute("autoplay"); });
+    setMotion(true, false);
+  }
+  if (motionButton) {
+    motionButton.addEventListener("click", function () {
+      setMotion(motionButton.dataset.paused !== "true", true);
+    });
   }
 
   // Footer year

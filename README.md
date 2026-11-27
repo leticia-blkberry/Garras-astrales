@@ -92,3 +92,14 @@ For later updates, upload just the changed files to the same place in `public_ht
 | `.htaccess` | HTTPS redirect, 404 page, caching, hides private files |
 | `404.html` | "Page not found" page |
 
+
+## Accessibility (WCAG 2.1 AA / ADA)
+The site is built to meet WCAG 2.1 level AA, the standard used for ADA compliance. Keep these in place when editing:
+- **Contrast:** text on light backgrounds uses `--ink`, `--muted` or `--amber-text` (`#8a4b0b`). The bright amber (`--amber`, `--amber-deep`) is only for text on dark backgrounds or for decoration, never for text on cream.
+- **Motion:** every page has a "Pause animations" button in the top bar that stops all video and animation and remembers the choice. Visitors whose device asks for reduced motion start paused. Any new looping video or animation must respect the `motion-paused` class.
+- **Keyboard:** "Skip to content" is the first tab stop, every control has a visible focus ring (espresso on light areas, amber on dark ones), and the phone menu is a real button.
+- **Structure:** one `h1` per page, headings in order, landmarks for top bar, header, nav, main and footer.
+- **Links and forms:** links that open a new tab say so to screen readers, and every form field has a label; required ones say "(required)".
+- **Images and video:** decorative images have empty `alt`; the hero and icon videos are silent and hidden from screen readers.
+
+Checked with axe-core 4.10 (no violations at desktop and phone width on every page). Automated tools catch only part of WCAG, so a manual check with a screen reader (VoiceOver or NVDA) is worth doing before launch, and again whenever real cat photos are added: each needs meaningful `alt` text (set from the cat's name automatically).
