@@ -54,8 +54,9 @@
           </div>
         </div>
         <div class="hc-portal" aria-hidden="true">
-          <video class="" autoplay muted loop playsinline preload="auto" poster="assets/hero-cat-poster.jpg" aria-hidden="true"><source src="assets/hero-cat.mp4" type="video/mp4"></video>
-          <img src="assets/logo-mark.png" alt="">
+          <div class="hc-portal-fill"></div>
+          <video class="hc-portal-dark" autoplay muted loop playsinline preload="auto" poster="assets/hero-cat-poster.jpg"><source src="assets/hero-cat.mp4" type="video/mp4"></video>
+          <video class="hc-portal-orange" autoplay muted loop playsinline preload="auto" poster="assets/hero-cat-poster.jpg"><source src="assets/hero-cat.mp4" type="video/mp4"></video>
         </div>
       </div>
     </section>
@@ -149,5 +150,14 @@
   </footer>
   <script src="js/cats.js"></script>
   <script src="js/main.js"></script>
+  <script>
+    (function () {
+      var lead = document.querySelector(".hc-portal-dark"), follow = document.querySelector(".hc-portal-orange");
+      if (!lead || !follow) return;
+      lead.addEventListener("timeupdate", function () {
+        if (Math.abs(follow.currentTime - lead.currentTime) > 0.08) follow.currentTime = lead.currentTime;
+      });
+    })();
+  </script>
 </body>
 </html>
