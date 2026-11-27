@@ -18,7 +18,7 @@ Put photos in `assets/cats/` and set `photo: "assets/cats/luna.jpg"`. Set `featu
 
 ## Still to fill in
 - [ ] Vector/high-res logo files from the designer
-- [ ] Photos of Kaya and Beba, and remove the sample cats after them in `js/cats.js`
+- [ ] Photos of Kaya, Beba and Gris (`assets/cats/`), and a fuller description of Gris
 - [x] Impact numbers on the homepage (update in `index.html`, the `stat` blocks)
 - [ ] Adoption fees (`$___` on `adopt.html`)
 - [ ] "Our story" on `about.html`

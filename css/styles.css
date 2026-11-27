@@ -257,23 +257,34 @@ img { max-width: 100%; display: block; }
 
 .cat-card { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
 .cat-photo {
-  aspect-ratio: 4 / 3; display: grid; place-items: center;
+  aspect-ratio: 3 / 2; display: grid; place-items: center;
   background: linear-gradient(135deg, var(--amber-soft), var(--bg));
 }
 .cat-photo { position: relative; z-index: 1; box-shadow: 0 6px 12px -6px rgba(43, 36, 32, 0.35); }
 .cat-photo img { width: 100%; height: 100%; object-fit: cover; }
-.cat-photo img.placeholder { width: 46%; height: auto; object-fit: contain; opacity: 0.4; }
-.cat-body { padding: 20px 22px 24px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.cat-photo img.placeholder { width: 38%; height: auto; object-fit: contain; opacity: 0.4; }
+.cat-body { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
 .cat-body h3 { margin: 0; }
 .cat-meta { color: var(--muted); font-size: 0.92rem; margin: 0; }
 .tags { display: flex; flex-wrap: wrap; gap: 6px; }
 .tag { background: var(--amber-soft); color: var(--espresso); font-size: 0.78rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; }
 .tag--dark { background: var(--espresso); color: var(--cream); }
-.cat-body .btn { margin-top: auto; align-self: flex-start; }
 .cat-pair {
-  margin: 4px 0 8px; padding: 10px 14px; border-radius: 10px;
-  background: var(--amber-soft); color: var(--ink); font-size: 0.92rem;
+  align-self: flex-start; margin: 0; padding: 3px 12px; border-radius: 999px;
+  background: var(--espresso); color: var(--cream); font-size: 0.8rem; font-weight: 700;
 }
+.cat-story p { margin: 0 0 0.6em; }
+.cat-story p:last-child { margin-bottom: 0; }
+/* Collapsed: first three lines of the story only */
+.cat-story.is-clamped { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; line-clamp: 3; overflow: hidden; }
+.cat-actions { margin-top: auto; padding-top: 6px; display: flex; align-items: center; flex-wrap: wrap; gap: 4px 16px; }
+.cat-more {
+  background: none; border: 0; padding: 8px 2px; min-height: 24px;
+  font: inherit; font-weight: 700; color: var(--link); text-decoration: underline; cursor: pointer;
+}
+.cat-more:hover { color: var(--ink); }
+/* When a story is opened, only that card grows; the others keep their size */
+.grid:has(.cat-story:not(.is-clamped)) { align-items: start; }
 
 /* Steps */
 .steps { counter-reset: step; list-style: none; padding: 0; display: grid; gap: 16px; }

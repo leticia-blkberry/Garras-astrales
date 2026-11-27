@@ -119,7 +119,9 @@
     return d.innerHTML;
   }
 
+  var cardCount = 0;
   function catCard(cat) {
+    var id = "cat-story-" + (++cardCount);
     var photo = cat.photo
       ? '<img src="' + esc(cat.photo) + '" alt="Photo of ' + esc(cat.name) + '" loading="lazy">'
       : PLACEHOLDER;
@@ -133,18 +135,41 @@
       "<h3>" + esc(cat.name) + "</h3>" +
       '<p class="cat-meta">' + [cat.sex, cat.ageLabel, cat.coat].filter(Boolean).map(esc).join(" · ") + "</p>" +
       '<div class="tags">' + tags + "</div>" +
+      (cat.pairShort ? '<p class="cat-pair">' + esc(cat.pairShort) + "</p>" : "") +
+      '<div class="cat-story is-clamped" id="' + id + '">' +
       "<p>" + esc(cat.story) + "</p>" +
-      (cat.pair ? '<p class="cat-pair">' + esc(cat.pair) + "</p>" : "") +
+      (cat.pair ? "<p>" + esc(cat.pair) + "</p>" : "") +
+      "</div>" +
+      '<div class="cat-actions">' +
       '<a class="btn btn--primary" href="contact.html?subject=' + subject + '">Meet ' + esc(cat.name.split(" ")[0]) + "</a>" +
+      '<button class="cat-more" type="button" aria-expanded="false" aria-controls="' + id + '" hidden>Read more<span class="sr-only"> about ' + esc(cat.name) + "</span></button>" +
+      "</div>" +
       "</div></article>"
     );
   }
+
+  // Show "Read more" only where the story is cut off, and let it expand in place
+  function enhanceCards(container) {
+    container.querySelectorAll(".cat-card").forEach(function (card) {
+      var story = card.querySelector(".cat-story"), more = card.querySelector(".cat-more");
+      if (!story || !more) return;
+      more.hidden = story.scrollHeight <= story.clientHeight + 2;
+      more.addEventListener("click", function () {
+        var open = more.getAttribute("aria-expanded") === "true";
+        story.classList.toggle("is-clamped", open);
+        more.setAttribute("aria-expanded", String(!open));
+        more.firstChild.textContent = open ? "Read more" : "Show less";
+      });
+    });
+  }
+
 
   var cats = window.GA_CATS || [];
 
   var featured = document.getElementById("featured-cats");
   if (featured) {
     featured.innerHTML = cats.filter(function (c) { return c.featured; }).slice(0, 3).map(catCard).join("");
+    enhanceCards(featured);
   }
 
   var list = document.getElementById("cat-list");
@@ -154,6 +179,7 @@
       list.innerHTML = shown.length
         ? shown.map(catCard).join("")
         : '<p class="lead">No cats in this group right now — check back soon!</p>';
+      enhanceCards(list);
     };
     document.querySelectorAll(".filters .chip").forEach(function (chip) {
       chip.addEventListener("click", function () {
