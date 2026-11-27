@@ -408,3 +408,45 @@ input:focus, select:focus, textarea:focus, .btn:focus-visible, .chip:focus-visib
 @media (max-width: 300px) {
   .hero-portal h1 { font-size: 1.5rem; }
 }
+
+/* Homepage: adoption path under the featured cats */
+.adopt-path {
+  margin-top: 40px; padding: 28px; border-radius: var(--radius);
+  background: var(--paper); border: 1px solid var(--line); box-shadow: var(--shadow);
+  display: grid; grid-template-columns: auto 1fr; gap: 12px 32px; align-items: center;
+}
+.adopt-path-title { margin: 0; font-size: 1.5rem; }
+.adopt-steps { counter-reset: step; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.adopt-steps li { counter-increment: step; position: relative; padding-left: 44px; min-width: 0; }
+.adopt-steps li::before {
+  content: counter(step); position: absolute; left: 0; top: 0;
+  width: 32px; height: 32px; border-radius: 50%; background: var(--espresso); color: var(--amber);
+  display: grid; place-items: center; font-weight: 800; font-size: 0.9rem; box-shadow: var(--shadow-sm);
+}
+.adopt-path .btn-row { grid-column: 1 / -1; margin-top: 8px; justify-content: center; }
+@media (max-width: 900px) {
+  .adopt-path { grid-template-columns: 1fr; text-align: left; }
+  .adopt-steps { grid-template-columns: 1fr; }
+}
+
+/* Homepage: impact band */
+.impact { padding: 48px 0; }
+.impact .stats-caption { margin-top: 0; font-family: "Nunito Sans", sans-serif; line-height: 1.5; }
+
+/* Homepage: spread the word */
+.share-strip {
+  margin-top: 28px; padding: 24px 28px; border-radius: var(--radius);
+  background: var(--amber-soft); display: grid; grid-template-columns: auto 1fr auto; gap: 16px 24px; align-items: center;
+  box-shadow: var(--shadow-sm);
+}
+.share-icon { width: 52px; height: 52px; border-radius: 50%; background: var(--espresso); color: var(--amber); display: grid; place-items: center; }
+.share-icon svg { width: 26px; height: 26px; }
+.share-text h3 { margin: 0 0 4px; }
+.share-text p { margin: 0; }
+@media (max-width: 700px) {
+  .share-strip { grid-template-columns: auto 1fr; }
+  .share-strip .btn { grid-column: 1 / -1; justify-self: start; }
+}
+@media (max-width: 360px) {
+  .impact .stats-caption { letter-spacing: 0.08em; }
+}
