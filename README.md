@@ -98,6 +98,7 @@ The site is built to meet WCAG 2.1 level AA, the standard used for ADA complianc
 - **Contrast:** text on light backgrounds uses `--ink`, `--muted` or `--amber-text` (`#8a4b0b`). The bright amber (`--amber`, `--amber-deep`) is only for text on dark backgrounds or for decoration, never for text on cream.
 - **Motion:** every page has a "Pause animations" button in the top bar that stops all video and animation and remembers the choice. Visitors whose device asks for reduced motion start paused. Any new looping video or animation must respect the `motion-paused` class.
 - **Keyboard:** "Skip to content" is the first tab stop, every control has a visible focus ring (espresso on light areas, amber on dark ones), and the phone menu is a real button.
+- **Headings** must fit on one or two lines, never three, at any screen width. The homepage headline size is tuned for this; keep new headings short or check them at phone and desktop widths.
 - **Structure:** one `h1` per page, headings in order, landmarks for top bar, header, nav, main and footer.
 - **Links and forms:** links that open a new tab say so to screen readers, and every form field has a label; required ones say "(required)".
 - **Images and video:** decorative images have empty `alt`; the hero and icon videos are silent and hidden from screen readers.

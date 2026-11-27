@@ -95,12 +95,13 @@ img { max-width: 100%; display: block; }
 .top-bar .container { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 38px; }
 .top-bar-msg { margin: 0; }
 .top-bar-ig {
+  white-space: nowrap;
   display: inline-flex; align-items: center; gap: 8px; color: var(--cream); text-decoration: none; font-weight: 700;
   padding: 4px 8px; margin-right: -8px; border-radius: 999px;
 }
 .top-bar-ig:hover { color: var(--amber); }
 .ig-icon { width: 18px; height: 18px; flex: none; }
-@media (max-width: 640px) {
+@media (max-width: 900px) {
   .top-bar-msg { display: none; }
   .top-bar .container { justify-content: center; }
   .top-bar-ig { margin-right: 0; }
@@ -177,7 +178,8 @@ img { max-width: 100%; display: block; }
   padding: 72px 0;
   border-bottom: 1px solid var(--line);
 }
-.hero-portal h1 { color: var(--espresso); font-size: clamp(2.2rem, 4.4vw, 3.3rem); text-wrap: balance; }
+/* Sized so the headline always fits on one or two lines, never three */
+.hero-portal h1 { color: var(--espresso); font-size: clamp(1.9rem, 3.9vw, 3.1rem); text-wrap: balance; }
 .hero-portal .lead { color: var(--muted); }
 .hero-portal .eyebrow { color: var(--amber-text); letter-spacing: 0.16em; text-wrap: balance; }
 .hero-portal .btn--ghost { color: var(--espresso); }
@@ -204,6 +206,7 @@ img { max-width: 100%; display: block; }
 @keyframes portal-float { 50% { transform: translateY(-14px) rotate(-1.5deg); } }
 @media (max-width: 820px) {
   .hero-portal-grid { grid-template-columns: 1fr; gap: 28px; text-align: center; }
+  .hero-portal h1 { font-size: clamp(1.9rem, 6vw, 2.9rem); }
   .hero-portal .eyebrow, .hero-portal .btn-row { justify-content: center; }
   .hero-portal .lead { margin-inline: auto; }
   .hero-portal .eyebrow::before { display: none; }
@@ -324,7 +327,12 @@ input:focus, select:focus, textarea:focus, .btn:focus-visible, .chip:focus-visib
   display: inline-flex; align-items: center; gap: 6px;
   background: transparent; color: var(--cream); border: 1px solid rgba(248, 241, 236, 0.45);
   border-radius: 999px; padding: 4px 12px; min-height: 28px; font: inherit; font-weight: 700; cursor: pointer;
+  white-space: nowrap;
 }
 .motion-toggle:hover { border-color: var(--amber); color: var(--amber); }
 .motion-toggle svg { width: 14px; height: 14px; flex: none; }
 .motion-paused *, .motion-paused *::before, .motion-paused *::after { animation-play-state: paused !important; }
+@media (max-width: 360px) {
+  .top-bar-ig span { display: none; }      /* icon only; the link keeps its aria-label */
+  .top-bar-ig { padding: 4px 6px; }
+}
