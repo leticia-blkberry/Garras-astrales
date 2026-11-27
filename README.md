@@ -96,6 +96,7 @@ For later updates, upload just the changed files to the same place in `public_ht
 ## Accessibility (WCAG 2.1 AA / ADA)
 The site is built to meet WCAG 2.1 level AA, the standard used for ADA compliance. Keep these in place when editing:
 - **Contrast:** text on light backgrounds uses `--ink`, `--muted` or `--amber-text` (`#8a4b0b`). The bright amber (`--amber`, `--amber-deep`) is only for text on dark backgrounds or for decoration, never for text on cream.
+- **Logo shadow (homepage):** the emblem silhouette that follows the visitor down the page is capped at 7% opacity (`MAX_OPACITY` in `js/main.js`). `--muted` was darkened to `#5f5854` so grey text stays above 4.5:1 even where the shadow passes behind it; raise the opacity only after re-checking contrast. It is hidden for reduced motion and when animations are paused.
 - **Motion:** every page has a "Pause animations" button in the top bar that stops all video and animation and remembers the choice. Visitors whose device asks for reduced motion start paused. Any new looping video or animation must respect the `motion-paused` class.
 - **Keyboard:** "Skip to content" is the first tab stop, every control has a visible focus ring (espresso on light areas, amber on dark ones), and the phone menu is a real button.
 - **Headings** must fit on one or two lines, never three, at any screen width. The homepage headline size is tuned for this; keep new headings short or check them at phone and desktop widths.

@@ -10,7 +10,7 @@
   --cream: #f8f1ec;         /* light text on dark areas */
   --paper: #F7F4E8;         /* cards and alternate sections, a lighter tint of --bg */
   --ink: #3d3431;
-  --muted: #6e6763;         /* logo "COLLECTIVE" gray, darkened for contrast */
+  --muted: #5f5854;        /* darkened from the logo grey so it stays 4.5:1+ even over the scrolling logo shadow */         /* logo "COLLECTIVE" gray, darkened for contrast */
   --link: #8a4b0b;          /* amber darkened to 5.5:1 on --bg for readable links (WCAG AA) */
   --amber-text: #8a4b0b;    /* amber for text on light backgrounds; bright amber is only for dark ones */
   --on-dark: #e9dfd7;
@@ -345,3 +345,17 @@ input:focus, select:focus, textarea:focus, .btn:focus-visible, .chip:focus-visib
   .top-bar-ig span { display: none; }      /* icon only; the link keeps its aria-label */
   .top-bar-ig { padding: 4px 6px; }
 }
+
+/* Homepage: the hero emblem's silhouette follows the visitor down the page like a soft shadow
+   on the section backgrounds. It sits above section backgrounds and below their content. */
+.has-logo-shadow main > section:not(.hero-portal) > .container { position: relative; z-index: 1; }
+.logo-shadow {
+  position: fixed; top: 0; left: 0; z-index: 0; pointer-events: none;
+  width: min(560px, 70vw); aspect-ratio: 394 / 408;
+  background: var(--espresso);
+  -webkit-mask: url("../assets/logo-mask.png") center / contain no-repeat;
+          mask: url("../assets/logo-mask.png") center / contain no-repeat;
+  opacity: 0; will-change: transform, opacity;
+}
+@media (prefers-reduced-motion: reduce) { .logo-shadow { display: none; } }
+.motion-paused .logo-shadow { display: none; }

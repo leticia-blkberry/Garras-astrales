@@ -53,6 +53,57 @@
     });
   }
 
+  // Homepage: the emblem's silhouette drifts down the page as a soft shadow,
+  // crossing from side to side into each section. Scroll-linked, so it only moves when the visitor scrolls.
+  var heroPortal = document.querySelector(".hero-portal");
+  if (heroPortal) {
+    document.body.classList.add("has-logo-shadow");
+    var shadow = document.createElement("div");
+    shadow.className = "logo-shadow";
+    shadow.setAttribute("aria-hidden", "true");
+    document.body.appendChild(shadow);
+    var footer = document.querySelector(".site-footer");
+    var sections = [].slice.call(document.querySelectorAll("main > section:not(.hero-portal)"));
+    var MAX_OPACITY = 0.07;      // keep in step with the contrast check in README (Accessibility)
+    var ticking = false;
+
+    var place = function () {
+      ticking = false;
+      var vw = window.innerWidth, vh = window.innerHeight;
+      var size = shadow.offsetWidth, sh = shadow.offsetHeight;
+      var y = window.scrollY + vh / 2;              // page position at the middle of the screen
+      // Each section has a resting spot: alternate right, left, right...
+      var stops = sections.map(function (sec, i) {
+        var top = sec.offsetTop, h = sec.offsetHeight;
+        return { at: top + h / 2, x: i % 2 === 0 ? vw * 0.62 : vw * 0.04 - size * 0.15, rot: i % 2 === 0 ? 10 : -10 };
+      });
+      var heroRect = heroPortal.querySelector(".portal").getBoundingClientRect();
+      var start = { at: heroPortal.offsetTop + heroPortal.offsetHeight / 2, x: heroRect.left + heroRect.width / 2 - size / 2, rot: 0 };
+      stops.unshift(start);
+      var a = stops[0], b = stops[stops.length - 1];
+      for (var i = 0; i < stops.length - 1; i++) {
+        if (y >= stops[i].at && y <= stops[i + 1].at) { a = stops[i]; b = stops[i + 1]; break; }
+      }
+      if (y > stops[stops.length - 1].at) a = b;
+      var t = b.at === a.at ? 0 : Math.min(1, Math.max(0, (y - a.at) / (b.at - a.at)));
+      t = t * t * (3 - 2 * t);                      // ease in and out between stops
+      var x = a.x + (b.x - a.x) * t;
+      var rot = a.rot + (b.rot - a.rot) * t;
+      var scale = 0.9 + 0.2 * Math.sin(t * Math.PI);
+      shadow.style.transform = "translate(" + x + "px," + (vh / 2 - sh / 2) + "px) rotate(" + rot + "deg) scale(" + scale + ")";
+      // Fade in as the hero leaves the screen, fade out before the dark footer
+      var heroBottom = heroPortal.getBoundingClientRect().bottom;
+      var fadeIn = Math.min(1, Math.max(0, (vh * 0.75 - heroBottom) / (vh * 0.5)));
+      var fadeOut = footer ? Math.min(1, Math.max(0, (footer.getBoundingClientRect().top - vh * 0.4) / (vh * 0.4))) : 1;
+      shadow.style.opacity = String(MAX_OPACITY * fadeIn * fadeOut);
+    };
+    var request = function () { if (!ticking) { ticking = true; requestAnimationFrame(place); } };
+    window.addEventListener("scroll", request, { passive: true });
+    window.addEventListener("resize", request);
+    window.addEventListener("load", request);
+    place();
+  }
+
   // Footer year
   document.querySelectorAll("[data-year]").forEach(function (el) {
     el.textContent = new Date().getFullYear();
