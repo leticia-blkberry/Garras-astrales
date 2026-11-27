@@ -209,6 +209,11 @@ img { max-width: 100%; display: block; }
 .card:hover { box-shadow: var(--shadow-hover); }
 .cat-card:hover { transform: translateY(-3px); }
 .card .icon { font-size: 2rem; line-height: 1; margin-bottom: 12px; }
+/* Animated icons: white is baked into the video and dropped by multiply, so they sit on any light card */
+.icon--anim { width: 96px; height: 96px; margin: -8px 0 4px -10px; }
+.icon--anim video { display: block; width: 100%; height: 100%; mix-blend-mode: multiply; }
+.icon-credit { margin: 12px 0 0; font-size: 0.78rem; color: var(--muted); text-align: right; }
+.icon-credit a { color: inherit; }
 
 .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-top: 32px; }
 .stat { text-align: center; padding: 20px; }
