@@ -383,11 +383,18 @@ input:focus, select:focus, textarea:focus, .btn:focus-visible, .chip:focus-visib
 .has-logo-shadow main > section > .container { position: relative; z-index: 1; }
 .logo-shadow {
   position: fixed; top: 0; left: 0; z-index: 0; pointer-events: none;
-  width: min(560px, 70vw); aspect-ratio: 394 / 408;
-  background: var(--espresso);
+  width: min(560px, 70vw); aspect-ratio: 408 / 394;     /* the emblem image is 408 x 394 */
+  background: color-mix(in srgb, var(--espresso) calc((1 - var(--morph)) * 100%), transparent);
   -webkit-mask: url("../assets/logo-mask.png") center / contain no-repeat;
           mask: url("../assets/logo-mask.png") center / contain no-repeat;
   opacity: 0; will-change: transform, opacity;
+  --morph: 0;
+}
+/* the footer emblem's own colours, faded in as the shadow lands on the footer logo */
+.logo-shadow::after {
+  content: ""; position: absolute; inset: 0;
+  background: url("../assets/logo-mark-light.png") center / contain no-repeat;
+  opacity: var(--morph);
 }
 @media (prefers-reduced-motion: reduce) { .logo-shadow { display: none; } }
 .motion-paused .logo-shadow { display: none; }

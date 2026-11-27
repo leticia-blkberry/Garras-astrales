@@ -54,6 +54,7 @@
         : '<rect x="3" y="2" width="3.5" height="12" rx="1" fill="currentColor"/><rect x="9.5" y="2" width="3.5" height="12" rx="1" fill="currentColor"/>';
     }
     if (remember) { try { localStorage.setItem("ga-motion", paused ? "paused" : "playing"); } catch (e) {} }
+    window.dispatchEvent(new Event("resize"));
   }
   var startPaused = saved ? saved === "paused" : reduce;
   if (startPaused) {
@@ -81,6 +82,12 @@
     var sections = shadowSections;
     var emblem = heroPortal.querySelector(".portal");
     var MAX_OPACITY = 0.07;      // keep in step with the contrast check in README (Accessibility)
+    var footerLogo = document.querySelector(".footer-logo");
+    // Where the emblem sits inside the footer lockup image, and inside the shadow box (measured from the PNGs)
+    var EMBLEM_IN_LOCKUP = { x: 0.2183, y: 0.0147, w: 0.5578, h: 0.6905 };
+    var EMBLEM_IN_SHADOW = 0.9583;
+    // Hidden for reduced motion / paused animations: then the footer logo simply shows as normal
+    var shadowActive = function () { return getComputedStyle(shadow).display !== "none"; };
     var ticking = false;
 
     var place = function () {
@@ -107,12 +114,35 @@
       var x = a.x + (b.x - a.x) * t;
       var rot = a.rot + (b.rot - a.rot) * t;
       var scale = 0.9 + 0.2 * Math.sin(t * Math.PI);
-      shadow.style.transform = "translate(" + x + "px," + (vh / 2 - sh / 2) + "px) rotate(" + rot + "deg) scale(" + scale + ")";
-      // Fade in as the hero leaves the screen, fade out before the dark footer
+      var ty = vh / 2 - sh / 2;
+      // Fade in as the hero leaves the screen
       var heroBottom = heroPortal.getBoundingClientRect().bottom;
       var fadeIn = Math.min(1, Math.max(0, (vh * 0.75 - heroBottom) / (vh * 0.5)));
-      var fadeOut = footer ? Math.min(1, Math.max(0, (footer.getBoundingClientRect().top - vh * 0.4) / (vh * 0.4))) : 1;
-      shadow.style.opacity = String(MAX_OPACITY * fadeIn * fadeOut);
+      var opacity = MAX_OPACITY * fadeIn;
+      var morph = 0, handoff = 0;
+
+      // Near the end, the shadow shrinks onto the footer emblem, takes on its colours and becomes it
+      if (footerLogo && footerLogo.offsetWidth) {
+        var f = footerLogo.getBoundingClientRect();
+        var targetW = (f.width * EMBLEM_IN_LOCKUP.w) / EMBLEM_IN_SHADOW;          // shadow width that matches the emblem
+        var cx = f.left + f.width * (EMBLEM_IN_LOCKUP.x + EMBLEM_IN_LOCKUP.w / 2);
+        var cy = f.top + f.height * (EMBLEM_IN_LOCKUP.y + EMBLEM_IN_LOCKUP.h / 2);
+        // 0 while the footer logo is still LEAD px below the screen, 1 once it is fully in view
+        var LEAD = vh * 0.45;
+        var p = Math.min(1, Math.max(0, (vh + LEAD - f.top) / (f.height * 0.7 + vh * 0.3 + LEAD)));
+        var e = p * p * (3 - 2 * p);
+        x += (cx - size / 2 - x) * e;
+        ty += (cy - sh / 2 - ty) * e;
+        rot += (0 - rot) * e;
+        scale += (targetW / size - scale) * e;
+        morph = Math.min(1, Math.max(0, (e - 0.4) / 0.55));                         // espresso -> logo colours
+        opacity += (1 - opacity) * morph;
+        handoff = Math.min(1, Math.max(0, (p - 0.9) / 0.1));                         // real footer logo takes over
+      }
+      shadow.style.transform = "translate(" + x + "px," + ty + "px) rotate(" + rot + "deg) scale(" + scale + ")";
+      shadow.style.setProperty("--morph", morph.toFixed(3));
+      shadow.style.opacity = String(opacity * (1 - handoff));
+      if (footerLogo) footerLogo.style.opacity = shadowActive() ? String(handoff) : "";
     };
     var request = function () { if (!ticking) { ticking = true; requestAnimationFrame(place); } };
     window.addEventListener("scroll", request, { passive: true });
