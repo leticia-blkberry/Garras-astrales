@@ -560,12 +560,13 @@ h1 .hl, h2 .hl { color: var(--amber-title); }
 }
 .footer-brand p { margin: 0 0 16px; color: var(--muted); max-width: 36ch; }
 .footer-logo { width: 170px; height: auto; margin-bottom: 14px; }
+/* matches the "Spread the word" icon: espresso circle, orange glyph */
 .footer-social {
-  display: inline-grid; place-items: center; width: 40px; height: 40px; border-radius: 50%;
-  background: var(--espresso); color: var(--cream); transition: background 0.15s ease;
+  display: inline-grid; place-items: center; width: 52px; height: 52px; border-radius: 50%;
+  background: var(--espresso); color: var(--amber); transition: background 0.15s ease, color 0.15s ease;
 }
-.footer-social:hover { background: var(--amber-deep); color: var(--espresso); }
-.footer-social svg { width: 20px; height: 20px; }
+.footer-social:hover { background: var(--amber); color: var(--espresso); }
+.footer-social svg { width: 26px; height: 26px; }
 
 .site-footer .footer-col h2 {
   margin: 6px 0 16px; color: var(--amber-text);
