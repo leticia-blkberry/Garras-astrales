@@ -100,17 +100,17 @@ img { max-width: 100%; display: block; }
   box-shadow: 0 2px 6px rgba(43, 36, 32, 0.18), 0 1px 2px rgba(43, 36, 32, 0.12); }
 .top-bar .container { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 38px; }
 .top-bar-msg { margin: 0; }
+/* same style as the "Spread the word" and footer icons, sized to fit the bar */
 .top-bar-ig {
-  white-space: nowrap;
-  display: inline-flex; align-items: center; gap: 8px; color: var(--espresso); text-decoration: none; font-weight: 700;
-  padding: 4px 8px; margin-right: -8px; border-radius: 999px;
+  display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%;
+  background: var(--espresso); color: var(--amber); text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
 }
-.top-bar-ig:hover { color: var(--espresso-deep); background: rgba(43, 36, 32, 0.1); }
-.ig-icon { width: 18px; height: 18px; flex: none; }
+.top-bar-ig:hover { background: var(--amber); color: var(--espresso); box-shadow: 0 0 0 1px var(--espresso); }
+.ig-icon { width: 16px; height: 16px; flex: none; }
 @media (max-width: 900px) {
   .top-bar-msg { display: none; }
   .top-bar .container { justify-content: center; }
-  .top-bar-ig { margin-right: 0; }
 }
 
 /* Header: menu split in two with the logo in the middle */
