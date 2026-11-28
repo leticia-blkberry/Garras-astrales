@@ -344,20 +344,6 @@ input:focus, select:focus, textarea:focus, .btn:focus-visible, .chip:focus-visib
 .cta-band .card p { color: var(--ink); }
 
 /* Footer */
-/* Light footer so the full-colour logo reads; an orange rule ties it to the top bar */
-.site-footer { background: var(--paper); color: var(--ink); padding: 56px 0 24px; margin-top: 72px;
-  border-top: 4px solid var(--amber-deep); box-shadow: 0 -6px 18px rgba(43, 36, 32, 0.06); }
-.site-footer a { color: var(--link); }
-.site-footer h2 {
-  color: var(--amber-text); font-size: 0.85rem; font-family: "Nunito Sans", sans-serif; text-transform: uppercase; letter-spacing: 0.2em;
-}
-.site-footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
-.footer-logo { width: 180px; margin-bottom: 16px; }
-.footer-grid { display: grid; gap: 32px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
-.footer-bottom { border-top: 1px solid var(--line); color: var(--muted); margin-top: 32px; padding-top: 20px; font-size: 0.85rem; }
-.footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
-/* "Credits" link (icon, video and photo credits live on credits.html) */
-.footer-credit { color: inherit; display: inline-block; padding: 2px 0; }
 
 .placeholder-note {
   background: #fdf0dc; border: 1px dashed var(--amber-deep); border-radius: 10px; padding: 10px 14px; font-size: 0.9rem;
@@ -524,12 +510,6 @@ h1 .hl, h2 .hl { color: var(--amber-title); }
 .help-banner .card, .help-banner .share-strip { color: var(--ink); }
 .help-banner .card :focus-visible, .help-banner .share-strip :focus-visible { outline-color: var(--espresso); }
 
-/* Footer: content spans the full width, with comfortable side padding */
-.site-footer > .container {
-  max-width: none;
-  padding-left: max(24px, 5vw, env(safe-area-inset-left, 0px));
-  padding-right: max(24px, 5vw, env(safe-area-inset-right, 0px));
-}
 
 /* "Meet the cats": soft shadows along the top and bottom edges, as if the dark bands either side sit above it */
 .cats-section {
@@ -537,18 +517,87 @@ h1 .hl, h2 .hl { color: var(--amber-title); }
   box-shadow: inset 0 14px 14px -12px rgba(43, 36, 32, 0.28), inset 0 -14px 14px -12px rgba(43, 36, 32, 0.28);
 }
 
-/* Footer: "Found a cat that needs help?" callout above the footer columns */
+
+/* ---------- Footer ---------- */
+.site-footer {
+  /* same peach-to-cream gradient as the header */
+  background: var(--bg) linear-gradient(135deg, var(--amber-soft), var(--bg)) fixed; color: var(--ink);
+  padding: 0 0 20px; margin-top: 96px;
+  border-top: 4px solid var(--amber-deep);
+}
+.site-footer > .container {
+  max-width: none;
+  padding-left: max(24px, 5vw, env(safe-area-inset-left, 0px));
+  padding-right: max(24px, 5vw, env(safe-area-inset-right, 0px));
+}
+/* "Found a cat that needs help?" card, lifted half over the footer's top edge */
 .footer-help {
-  display: flex; align-items: center; justify-content: space-between; gap: 16px 32px; flex-wrap: wrap;
-  padding: 24px 28px; margin-bottom: 40px; border-radius: var(--radius);
-  background: var(--espresso); color: var(--cream); box-shadow: var(--shadow);
+  display: flex; align-items: center; gap: 16px 24px; flex-wrap: wrap;
+  max-width: 1120px; margin: -48px auto 48px; padding: 22px 28px;
+  border-radius: var(--radius); background: var(--espresso); color: var(--cream);
+  box-shadow: 0 14px 30px rgba(43, 36, 32, 0.22);
+  position: relative; z-index: 2;
 }
-.footer-help > div { flex: 1 1 360px; min-width: 0; }
+.footer-help-icon {
+  flex: none; width: 52px; height: 52px; border-radius: 50%;
+  display: grid; place-items: center; background: var(--amber); color: var(--espresso);
+}
+.footer-help-icon svg { width: 26px; height: 26px; }
+.footer-help-text { flex: 1 1 320px; min-width: 0; }
 .site-footer .footer-help h2 {
-  margin: 0 0 4px; color: var(--cream); font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: clamp(1.5rem, 3vw, 1.9rem); text-transform: none; letter-spacing: 0;
+  margin: 0 0 2px; color: var(--cream); font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(1.4rem, 2.6vw, 1.8rem); text-transform: none; letter-spacing: 0;
 }
+.site-footer .footer-help h2::after { display: none; }
 .site-footer .footer-help h2 .hl { color: var(--amber); }
 .footer-help p { margin: 0; color: var(--on-dark); }
-.site-footer .footer-help .btn { color: var(--espresso); flex: none; }
+.footer-help .btn { flex: none; }
 .footer-help :focus-visible { outline-color: var(--amber); }
+
+.footer-grid {
+  display: grid; gap: 40px 32px; align-items: start;
+  grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(0, 1fr));
+}
+.footer-brand p { margin: 0 0 16px; color: var(--muted); max-width: 36ch; }
+.footer-logo { width: 170px; height: auto; margin-bottom: 14px; }
+.footer-social {
+  display: inline-grid; place-items: center; width: 40px; height: 40px; border-radius: 50%;
+  background: var(--espresso); color: var(--cream); transition: background 0.15s ease;
+}
+.footer-social:hover { background: var(--amber-deep); color: var(--espresso); }
+.footer-social svg { width: 20px; height: 20px; }
+
+.site-footer .footer-col h2 {
+  margin: 6px 0 16px; color: var(--amber-text);
+  font-family: "Nunito Sans", sans-serif; font-size: 0.8rem; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 0.2em;
+}
+.site-footer .footer-col h2::after { content: ""; display: block; width: 28px; height: 2px; margin-top: 10px; background: var(--amber-deep); }
+.site-footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 4px; }
+.footer-col a { display: inline-block; padding: 4px 0; color: var(--ink); text-decoration: none; font-weight: 600; }
+.footer-col a:hover { color: var(--link); text-decoration: underline; text-underline-offset: 3px; }
+.footer-contact li { display: flex; align-items: center; gap: 10px; color: var(--ink); }
+.footer-contact svg { width: 18px; height: 18px; flex: none; color: var(--amber-text); }
+.footer-contact span { padding: 4px 0; }
+
+.footer-bottom {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px;
+  margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--line);
+  color: var(--muted); font-size: 0.85rem;
+}
+.footer-credit { color: inherit; display: inline-block; padding: 2px 0; }
+.footer-credit:hover { color: var(--link); }
+
+@media (max-width: 980px) {
+  .footer-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .footer-brand { grid-column: 1 / -1; display: grid; grid-template-columns: auto 1fr; gap: 4px 24px; align-items: center; }
+  .footer-brand .footer-logo { grid-row: span 2; margin: 0; }
+  .footer-brand p { margin: 0; }
+}
+@media (max-width: 600px) {
+  .footer-help { margin-top: -36px; padding: 20px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .footer-brand { grid-template-columns: 1fr; justify-items: start; }
+  .footer-brand .footer-logo { grid-row: auto; }
+  .footer-col:last-child { grid-column: 1 / -1; }
+}
