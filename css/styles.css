@@ -504,10 +504,10 @@ h1 .hl, h2 .hl { color: var(--amber-title); }
 /* Parallax photo layer: taller than the section so it can drift as you scroll (js/main.js) */
 .help-bg {
   position: absolute; left: 0; right: 0; top: -20%; bottom: -20%; z-index: -2;
-  background: url("../assets/help-banner.jpg") center 35% / cover no-repeat;
+  background: url("../assets/help-banner.jpg") 72% 40% / cover no-repeat;   /* keeps the cat (right of the photo) in view */
   will-change: transform;
 }
-/* dark overlay; 0.75 keeps light text 4.5:1 over the white bed */
+/* dark overlay; 0.75 keeps light text 4.5:1 over the brightest parts of the photo */
 .help-banner::before {
   content: ""; position: absolute; inset: 0; z-index: -1;
   background: linear-gradient(180deg, rgba(43, 36, 32, 0.75), rgba(43, 36, 32, 0.82));
