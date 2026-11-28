@@ -456,8 +456,8 @@ input:focus, select:focus, textarea:focus, .btn:focus-visible, .chip:focus-visib
 
 /* Homepage: impact band */
 .impact { padding: 36px 0 28px; }
-/* Whiskers of Love: black band with light text */
-.section--alt.impact { background: #000; border-color: #000; color: var(--cream); }
+/* Whiskers of Love: dark espresso band with light text */
+.section--alt.impact { background: var(--espresso-deep); border-color: var(--espresso-deep); color: var(--cream); }   /* #2b2420 */
 .impact h2 { color: var(--cream); }
 .impact h2 .hl { color: var(--amber); }
 .impact .lead { color: var(--on-dark); }
