@@ -157,6 +157,27 @@
     place();
   }
 
+  // Parallax: the photo behind "Can't adopt right now?" moves slower than the page.
+  // Off for reduced motion and when animations are paused.
+  var helpBg = document.querySelector(".help-bg");
+  if (helpBg) {
+    var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)");
+    var pTick = false;
+    var parallax = function () {
+      pTick = false;
+      if ((reduceMotion && reduceMotion.matches) || document.documentElement.classList.contains("motion-paused")) {
+        helpBg.style.transform = ""; return;
+      }
+      var r = helpBg.parentElement.getBoundingClientRect();
+      var offset = (r.top + r.height / 2 - window.innerHeight / 2) * -0.15;
+      helpBg.style.transform = "translate3d(0," + offset.toFixed(1) + "px,0)";
+    };
+    var pRequest = function () { if (!pTick) { pTick = true; requestAnimationFrame(parallax); } };
+    window.addEventListener("scroll", pRequest, { passive: true });
+    window.addEventListener("resize", pRequest);
+    parallax();
+  }
+
   // Footer year
   document.querySelectorAll("[data-year]").forEach(function (el) {
     el.textContent = new Date().getFullYear();

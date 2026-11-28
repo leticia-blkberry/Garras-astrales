@@ -482,10 +482,19 @@ h1 .hl, h2 .hl { color: var(--amber-title); }
 
 /* "Can't adopt right now?" section: sleeping-cat photo under a dark overlay */
 .help-banner {
-  position: relative; isolation: isolate; color: var(--cream);
-  background:
-    linear-gradient(180deg, rgba(43, 36, 32, 0.75), rgba(43, 36, 32, 0.82)),   /* 0.75 keeps light text 4.5:1 over the white bed */
-    var(--espresso-deep) url("../assets/help-banner.jpg") center 35% / cover no-repeat;
+  position: relative; isolation: isolate; overflow: hidden; color: var(--cream);
+  background: var(--espresso-deep);
+}
+/* Parallax photo layer: taller than the section so it can drift as you scroll (js/main.js) */
+.help-bg {
+  position: absolute; left: 0; right: 0; top: -20%; bottom: -20%; z-index: -2;
+  background: url("../assets/help-banner.jpg") center 35% / cover no-repeat;
+  will-change: transform;
+}
+/* dark overlay; 0.75 keeps light text 4.5:1 over the white bed */
+.help-banner::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(180deg, rgba(43, 36, 32, 0.75), rgba(43, 36, 32, 0.82));
 }
 .help-banner h2 { color: var(--cream); }
 .help-banner h2 .hl { color: var(--amber); }
