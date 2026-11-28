@@ -193,6 +193,14 @@
     parallax();
   }
 
+  // Sticky header: slim it down once the page has scrolled past the top bar
+  var siteHeader = document.querySelector(".site-header");
+  if (siteHeader) {
+    var stuck = function () { siteHeader.classList.toggle("is-stuck", window.scrollY > 40); };
+    window.addEventListener("scroll", stuck, { passive: true });
+    stuck();
+  }
+
   // Footer year
   document.querySelectorAll("[data-year]").forEach(function (el) {
     el.textContent = new Date().getFullYear();
