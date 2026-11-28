@@ -373,13 +373,18 @@ input:focus, select:focus, textarea:focus, .btn:focus-visible, .chip:focus-visib
 /* Pause control for looping video and animation (WCAG 2.2.2) */
 .top-bar-actions { display: flex; align-items: center; gap: 12px; }
 .motion-toggle {
-  display: inline-flex; align-items: center; gap: 6px;
-  background: transparent; color: var(--espresso); border: 1px solid var(--espresso);
-  border-radius: 999px; padding: 4px 12px; min-height: 28px; font: inherit; font-weight: 700; cursor: pointer;
-  white-space: nowrap;
+  position: absolute; z-index: 3;
+  right: max(16px, env(safe-area-inset-right, 0px)); bottom: 16px;
+  width: 40px; height: 40px; border-radius: 50%;
+  display: grid; place-items: center; padding: 0; cursor: pointer;
+  background: rgba(43, 36, 32, 0.55); color: var(--cream);
+  border: 1px solid rgba(248, 241, 236, 0.5);
+  backdrop-filter: blur(4px);
+  transition: background 0.15s ease, border-color 0.15s ease;
 }
-.motion-toggle:hover { background: rgba(43, 36, 32, 0.1); }
-.motion-toggle svg { width: 14px; height: 14px; flex: none; }
+.motion-toggle:hover { background: rgba(43, 36, 32, 0.8); border-color: var(--amber); color: var(--amber); }
+.motion-toggle:focus-visible { outline: 3px solid var(--amber); outline-offset: 2px; }
+.motion-toggle svg { width: 14px; height: 14px; }
 .motion-paused *, .motion-paused *::before, .motion-paused *::after { animation-play-state: paused !important; }
 
 

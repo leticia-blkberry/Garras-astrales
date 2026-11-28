@@ -37,7 +37,20 @@
 
   // Pause / play all looping video and animation (WCAG 2.2.2).
   // Starts paused for visitors who ask their device for reduced motion; the choice is remembered.
-  var motionButton = document.querySelector(".motion-toggle");
+  // The control sits in the bottom-right corner of the page's hero, on the moving content.
+  // Icon only; its spoken label and tooltip say what it does.
+  var motionButton = null;
+  var motionHost = document.querySelector("main > .hero-portal, main > .hero");
+  if (motionHost) {
+    motionButton = document.createElement("button");
+    motionButton.type = "button";
+    motionButton.className = "motion-toggle";
+    motionButton.dataset.paused = "false";
+    motionButton.setAttribute("aria-label", "Pause animations");
+    motionButton.title = "Pause animations";
+    motionButton.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><rect x="3" y="2" width="3.5" height="12" rx="1" fill="currentColor"/><rect x="9.5" y="2" width="3.5" height="12" rx="1" fill="currentColor"/></svg>';
+    motionHost.appendChild(motionButton);
+  }
   var saved = null;
   try { saved = localStorage.getItem("ga-motion"); } catch (e) {}
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -48,7 +61,9 @@
     });
     if (motionButton) {
       motionButton.dataset.paused = String(paused);
-      motionButton.querySelector("span").textContent = paused ? "Play animations" : "Pause animations";
+      var label = paused ? "Play animations" : "Pause animations";
+      motionButton.setAttribute("aria-label", label);
+      motionButton.title = label;
       motionButton.querySelector("svg").innerHTML = paused
         ? '<path d="M4 2.5v11l9-5.5z" fill="currentColor"/>'
         : '<rect x="3" y="2" width="3.5" height="12" rx="1" fill="currentColor"/><rect x="9.5" y="2" width="3.5" height="12" rx="1" fill="currentColor"/>';
