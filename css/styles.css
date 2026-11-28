@@ -285,6 +285,9 @@ html { scroll-padding-top: 120px; }       /* in-page links land below the sticky
 }
 .cat-photo { position: relative; z-index: 1; box-shadow: 0 6px 12px -6px rgba(43, 36, 32, 0.35); }
 .cat-photo img { width: 100%; height: 100%; object-fit: cover; }
+/* real photos fill the frame without stretching it (square photos would otherwise force a square frame) */
+.cat-photo { overflow: hidden; }
+.cat-photo img:not(.placeholder) { position: absolute; inset: 0; }
 .cat-photo img.placeholder { width: 38%; height: auto; object-fit: contain; opacity: 0.4; }
 .cat-body { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
 .cat-body h3 { margin: 0; }
@@ -603,26 +606,22 @@ h1 .hl, h2 .hl { color: var(--amber-title); }
   .footer-col:last-child { grid-column: 1 / -1; }
 }
 
-/* "Meet the cats" on the homepage: full width, with each cat as a wide horizontal card */
+/* "Meet the cats" on the homepage: full width */
 .cats-section > .container {
   max-width: none;
   padding-left: max(24px, 5vw, env(safe-area-inset-left, 0px));
   padding-right: max(24px, 5vw, env(safe-area-inset-right, 0px));
 }
-@media (min-width: 820px) {
-  .cats-section #featured-cats { grid-template-columns: 1fr; gap: 28px; }
-  .cats-section .cat-card { flex-direction: row; min-height: 320px; }
-  .cats-section .cat-photo {
-    flex: 0 0 min(46%, 720px); aspect-ratio: auto; position: relative;
-    box-shadow: 6px 0 12px -6px rgba(43, 36, 32, 0.35);
-  }
-  .cats-section .cat-photo img:not(.placeholder) { position: absolute; inset: 0; }
-  .cats-section .cat-body { padding: 28px 36px; justify-content: center; gap: 10px; }
-  .cats-section .cat-body h3 { font-size: 1.9rem; }
-  .cats-section .cat-story { -webkit-line-clamp: 4; line-clamp: 4; max-width: 70ch; }
-  .cats-section .cat-actions { margin-top: 8px; }
-  .cats-section .cat-card:nth-child(even) { flex-direction: row-reverse; }        /* alternate photo side */
-  .cats-section .cat-card:nth-child(even) .cat-photo { box-shadow: -6px 0 12px -6px rgba(43, 36, 32, 0.35); }
+/* all three cats in one row, each with a wide landscape photo on top */
+@media (min-width: 900px) {
+  .cats-section #featured-cats { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+  .cats-section .cat-photo { aspect-ratio: 3 / 2; }
+  .cats-section .cat-body { padding: 22px 26px 24px; }
+  .cats-section .cat-body h3 { font-size: 1.6rem; }
+}
+/* below that, one card per row (no 2 + 1 split) */
+@media (max-width: 899px) {
+  .cats-section #featured-cats { grid-template-columns: minmax(0, 560px); justify-content: center; }
 }
 
 /* Sticky header on phones: smaller logo, Menu button re-centred */
