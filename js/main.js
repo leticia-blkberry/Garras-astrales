@@ -40,7 +40,7 @@
   // The control sits in the bottom-right corner of the page's hero, on the moving content.
   // Icon only; its spoken label and tooltip say what it does.
   var motionButton = null;
-  var motionHost = document.querySelector("main > .hero-portal, main > .hero");
+  var motionHost = document.querySelector("main > .hero-portal, main > .hero, main > .cat-hero");
   if (motionHost) {
     motionButton = document.createElement("button");
     motionButton.type = "button";
