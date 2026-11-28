@@ -216,7 +216,8 @@
   function catUrl(cat) { return "cat.html?c=" + encodeURIComponent(slugOf(cat)); }
   function catPhoto(cat) {
     return cat.photo
-      ? '<img src="' + esc(cat.photo) + '" alt="Photo of ' + esc(cat.name) + '" loading="lazy">'
+      ? '<img src="' + esc(cat.photo) + '" alt="' + esc(cat.photoAlt || ("Photo of " + cat.name)) + '"' +
+        (cat.photoPos ? ' style="object-position:' + esc(cat.photoPos) + '"' : "") + ' loading="lazy">'
       : PLACEHOLDER;
   }
   function catTags(cat) {
